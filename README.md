@@ -1,5 +1,4 @@
-# Omnibot 2018-19 Senior Design Project
-### University of Akron
+# Omnibot 2018-19 Senior Design Project - University of Akron
 
 #### Hardware Specifications
 
