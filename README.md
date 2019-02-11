@@ -1,10 +1,10 @@
 # Omnibot 2018-19 Senior Design Project - University of Akron
 
-### Hardware Specifications
+### HARDWARE SPECIFICATIONS
 
 
 
-### Software Specification
+### SOFTWARE SPECIFICATIONS
 ##### Below are the diagrams for software
 
 -   Attributed to the OmnibotVector class:
