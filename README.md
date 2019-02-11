@@ -9,7 +9,7 @@
 #### Below are the diagrams for software
 
 Attributed to the OmnibotVector class:
-![Vector Constuction Diagram](veccon.png)
+![Vector Constuction Diagram](images/veccon.png)
 
 Attributed to the OmnibotCoilIntensity class:
-![Coil Intensity Diagram](coilintensity.png)
+![Coil Intensity Diagram](images/coilintensity.png)
