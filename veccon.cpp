@@ -13,7 +13,9 @@
 #include <stdio.h>
 #include <string>
 #include <cmath>
+#include <thread>
 
+using namespace std;
 #define PI 3.14159265
 
 class OmnibotVector{
