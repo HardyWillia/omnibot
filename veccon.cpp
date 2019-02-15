@@ -24,12 +24,15 @@ class OmnibotVector{
     double y = 0;
 
     //Pick mapping based on position theta 
+        //Theta and phi for the mapping
+        //Look at the onenote for the equations
 
 
     //1ST FUNCTION
     //Find distance of every nearby coil within radial distance
     //Loop through addresses and add to a data structure
     //Determine coils that are within 1 to 3.5cm
+    
 
     //Store all coils within that distance in a data structure
         //Check if it is a deadzone

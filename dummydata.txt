@@ -1,0 +1,5 @@
+phi and theta (comes in as double)
+theta (0 - pi)
+phi (0 - 2pi)
+
+parametric of a circle
