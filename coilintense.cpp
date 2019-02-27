@@ -8,10 +8,20 @@
 
 */
 
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <cmath>
+#include <thread>
+#include <fstream>
+
+using namespace std;
+#define PI 3.14159265
+
 class OmnibotCoilIntensity{
 
     //1ST FUNCTION
-    //Receive the angle of the coil furthest (theta) and the coil closest (phi) from the intended vector (output from veccon program)
+    //Receive the angle of the coil furthest (theta) and the coil closest (phi) from the intended vector (output from control algorithm)
 
     //2ND FUNCTION
     //Intensify the furthest coil to 100%
