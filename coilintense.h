@@ -1,4 +1,6 @@
 //Coil Intensity Program
+#ifndef COILINTENSE_H 
+#define COILINTENSE_H
 
 /* Last edit logs:
 
@@ -20,7 +22,6 @@
 using namespace std;
 #define PI 3.14159265
 
-class OmnibotCoilIntensity{
 
     double x = 0;
     double y = 0;
@@ -31,7 +32,8 @@ class OmnibotCoilIntensity{
     double intendvec;
 
     //1ST FUNCTION ?? need clarification
-    //Receive the angle of the coil furthest (theta) and the coil closest (phi) from the intended vector (output from control algorithm)
+    //Receive the angle of the coil furthest (theta) and the coil closest (phi) from the intended vector (output from control algorithm) 
+    //***May need to put this in main
 
     //2ND FUNCTION
     //Intensify the furthest coil to 100%
@@ -41,7 +43,7 @@ class OmnibotCoilIntensity{
         //Get the magnitudes for each coil
     //Output the magnitudes (determines coil intensity for switching)
 
-    double magOutput(){
+    double magOutput(double theta, double phi){
 
         double farcoil;
         double farcoilforce;
@@ -50,13 +52,21 @@ class OmnibotCoilIntensity{
         double farcoilmag;
         double closecoilmag;
         int intensity;
-        int num = 0;
 
-        farcoil = sin(theta[num]) * 30;
-        closecoilforce = (sin(abs(theta[num]) * 30))/(sin(abs(phi[num])));
-        vecmag = cos(abs(theta[num])) * max(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+        farcoil = sin(theta) * 30;
+        closecoilforce = (sin(abs(theta) * 30))/(sin(abs(phi)));
 
-        num++;
+        /*
+            Max current 30A
+            Max voltage 10.4V 
+            Max wattage 304W
+
+            **Will need at minimum 25% (76W) of intensity to power on a coil
+            100% = 304W
+            50% = 152W
+        */
+        vecmag = cos(abs(theta)) * max(farcoilforce, 100.0) + cos(abs(phi)) * (closecoilforce);
+
 
         cout << "What is the intended vector: " << endl;
         cin >> intendvec;
@@ -74,4 +84,5 @@ class OmnibotCoilIntensity{
         return farcoilmag, closecoilmag;
     }
 
-}
+
+#endif /* VECCON_H */

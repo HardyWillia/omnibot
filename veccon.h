@@ -1,5 +1,8 @@
 //Vector Reconstruction Program
 
+#ifndef VECCON_H 
+#define VECCON_H
+
 /* Last edit logs:
 
     -Willia 02/11/19: Added base pseudocode from diagram
@@ -19,7 +22,6 @@
 using namespace std;
 #define PI 3.14159265
 
-class OmnibotVector{
 
     double x = 0;
     double y = 0;
@@ -119,4 +121,5 @@ class OmnibotVector{
 
     //Output the result
 
-}
+
+#endif /* VECCON_H */
