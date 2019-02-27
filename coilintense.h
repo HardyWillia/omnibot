@@ -61,7 +61,7 @@ using namespace std;
         vecmag = cos(abs(theta)) * max(farcoilforce, 100.0) + cos(abs(phi)) * (closecoilforce);
 
 
-        cout << "What is the intended vector: " << endl;
+        cout << "What is the intended vector: ";
         cin >> intendvec;
 
         farcoilforce *= intendvec / vecmag;
