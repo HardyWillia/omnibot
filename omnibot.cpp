@@ -23,6 +23,12 @@ int main(){
 
     double furthestcoil;
     double closestcoil;
+    double x;
+    double y;
+    double theta[100];
+    double phi[100];
+    int radius = 17;
+    double coilAddress[300];
     //Add test cases here
 
     pickMapping();

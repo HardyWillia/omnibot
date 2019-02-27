@@ -22,13 +22,6 @@
 using namespace std;
 #define PI 3.14159265
 
-
-    double x;
-    double y;
-    double theta[100];
-    double phi[100];
-    int radius = 17;
-    double coilAddress[300];
     double intendvec;
 
     //1ST FUNCTION ?? need clarification
