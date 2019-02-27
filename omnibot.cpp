@@ -33,7 +33,7 @@ int main(){
 
     pickMapping();
     //findDistance();
-    returnAngle();
+    //returnAngle();
 
     cout << "What is the angle of the furthest coil?: ";
     cin >> furthestcoil;
@@ -41,6 +41,7 @@ int main(){
     cout << "What is the angle of the closest coil?: ";
     cin >> closestcoil;
 
+//	magOutput();
     magOutput(furthestcoil, closestcoil);
 
 

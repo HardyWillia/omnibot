@@ -27,6 +27,8 @@ using namespace std;
     double y;
     double theta[100];
     double phi[100];
+   // double theta;
+   // double phi;
     int radius = 17;
     double coilAddress[300];
 
@@ -36,6 +38,7 @@ using namespace std;
     double pickMapping(){
 
             int num = 0;
+	    double angle, result;
             double mapping[2];
             double mapping2[2] = {x, y};
             double mapping1[2] = {x, y};
@@ -45,21 +48,48 @@ using namespace std;
 
                 if (datafile.is_open())
                 {
-                    while ( getline (datafile,line) && !datafile.eof())
+                    while ( getline (datafile,line))		
                     {
+			datafile >> theta[num] >> phi[num];
                         if (theta[num] > PI/4){
                             x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                             y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                            mapping[2] = mapping2[2];
+			    cout << "X and Y: " << endl << x << endl << y << endl;
+                                if(x < 0){
+                                        result = (x * y) * -1;
+                                        result = atan2(y, x) + 180;
+                                        angle = result;
+                                 }
+                                else{
+                                        result = atan2(y, x);
+                                        angle = result;
+                                }
+
+			    mapping[2] = mapping2[2];
+			    cout << "Mapping 2 has been chosen" << endl;
+                            cout << "The angle is: " << angle << endl;
+			    ++num;
                         }
                         else
                         {
                             x = theta[num];
                             y = phi[num];
-                            mapping[2] = mapping1[2];
+                            cout << "X and Y: " << endl << x << endl << y << endl;
+                                if(x < 0){
+                                        result = (x * y) * -1;
+                                        result = atan2(y, x) + 180;
+                                        angle = result;
+                                 }
+                                else{
+                                        result = atan2(y, x);
+                                        angle = result;
+                                }
+                            
+			    mapping[2] = mapping1[2];
+			    cout << "Mapping 1 has been chosen" << endl;
+                            cout << "The angle is: " << angle << endl;
+			    ++num;
                         }
-
-                        num++;
 
                     }
                     datafile.close();
@@ -69,7 +99,7 @@ using namespace std;
                 else cout << "Unable to open file"; 
 
             
-            return mapping[2];
+            return angle, x, y, mapping[2];
         }
 
 
@@ -103,7 +133,7 @@ using namespace std;
         //Otherwise
             //Computer arctan(y/x)
             //Return the angle
-    double returnAngle(){
+ /*   double returnAngle(){
         double angle, result;
 
         if(x < 0){
@@ -117,7 +147,7 @@ using namespace std;
         }
         return angle;
     }
-
+*/
 
     //Output the result
 

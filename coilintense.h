@@ -37,7 +37,7 @@ using namespace std;
     //Output the magnitudes (determines coil intensity for switching)
 
     double magOutput(double theta, double phi){
-
+	
         double farcoil;
         double farcoilforce;
         double closecoilforce;
