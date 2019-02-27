@@ -71,8 +71,8 @@ using namespace std;
         closecoilmag = closecoilforce;
 
         //Used to check the magnitude for MIDTERM purposes
-        cout << farcoilmag;
-        cout << closecoilmag;
+        cout << farcoilmag << endl;
+        cout << closecoilmag << endl;
 
         return farcoilmag, closecoilmag;
     }
