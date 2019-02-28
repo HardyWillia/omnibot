@@ -203,13 +203,12 @@ double findDistance()
         upperCH.push_back(points[0]);
         upperCH.push_back(points[1]);
 
-        cout << "Sorted points: " << sortPoints(points[0], points[1]) << endl; 
-
         for (int i = 2; i < points.size(); i++)
         {
             while (upperCH.size() > 1 and (!right_turn(upperCH[upperCH.size() - 2], upperCH[upperCH.size() - 1], points[i])))
                 upperCH.pop_back();
             upperCH.push_back(points[i]);
+            cout << "Sorted points: " << sortPoints(points[i-2], points[i-1]) << endl; 
         }
         cout << "Furthest coil: " << endl;
         cout << "(" << upperCH[upperCH.size()-1].x << " , " << upperCH[upperCH.size()].y << ")" << endl;
