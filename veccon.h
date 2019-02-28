@@ -209,8 +209,8 @@ double findDistance()
             upperCH.push_back(points[i]);
         }
         cout << "Furthest coil: " << endl;
-        for (int i = 0; i < upperCH.size(); i++)
-            cout << "(" << upperCH[i].x << " , " << upperCH[i].y << ")" << endl;
+        //for (int i = 0; i < upperCH.size(); i++)
+            cout << "(" << upperCH[upperCH.size()-1].x << " , " << upperCH[upperCH.size()].y << ")" << endl;
 
         //Computing lower convex hull
         lowerCH.push_back(points[points.size() - 1]);
