@@ -7,6 +7,7 @@
 
     -Willia 02/11/19: Added base pseudocode from diagram
     -Willia 02/14/19: Added datatypes and code to last function
+    -Willia 02/28/19: Implemented Convex Hull algorithm to find distances
 
 
 
@@ -20,7 +21,7 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
-
+#include <list>
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -150,8 +151,7 @@ double findDistance()
 {
 
     ifstream myfile;
-    int n_points;
-    PointType *points;
+    //PointType *points;
     vector<PointType> lowerCH;
     vector<PointType> upperCH;
 
@@ -161,7 +161,8 @@ double findDistance()
     if (myfile.is_open())
     {
         // myfile >> n_points;
-        points = new PointType[999];
+        //points = new PointType[999];
+        vector<PointType> points;
         string line;
         int row = 0;
         while (getline(myfile, line))
@@ -169,18 +170,21 @@ double findDistance()
             std::stringstream ss(line);
             std::string token;
             int col = 1;
+
+            PointType point;
             while (std::getline(ss, token, ' '))
             {
                 if (col == 1)
                 {
-                    points[row].x = stod(token);
+                    point.x = stod(token);
                 }
                 else
                 {
-                    points[row].y = stod(token);
+                    point.y = stod(token);
                 }
                 col++;
             }
+            points.push_back(point);
             row++;
         }
         // for (int i = 0; i < n_points; i++)
@@ -189,16 +193,16 @@ double findDistance()
         myfile.close();
 
         //Sorting points
-        sort(points, points + n_points, sortPoints);
-        cout << "Sorted Points\n";
-        for (int i = 0; i != n_points; ++i)
-            cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
+        //sort(points, points + n_points, sortPoints);
+        //cout << "Sorted Points\n";
+        //for (int i = 0; i != n_points; ++i)
+          //  cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
 
         //Computing upper convex hull
         upperCH.push_back(points[0]);
         upperCH.push_back(points[1]);
 
-        for (int i = 2; i < n_points; i++)
+        for (int i = 2; i < points.size(); i++)
         {
             while (upperCH.size() > 1 and (!right_turn(upperCH[upperCH.size() - 2], upperCH[upperCH.size() - 1], points[i])))
                 upperCH.pop_back();
@@ -209,14 +213,14 @@ double findDistance()
             cout << "(" << upperCH[i].x << " , " << upperCH[i].y << ")" << endl;
 
         //Computing lower convex hull
-        lowerCH.push_back(points[n_points - 1]);
-        lowerCH.push_back(points[n_points - 2]);
+        lowerCH.push_back(points[points.size() - 1]);
+        lowerCH.push_back(points[points.size() - 2]);
 
-        for (int i = 2; i < n_points; i++)
+        for (int i = 2; i < points.size(); i++)
         {
-            while (lowerCH.size() > 1 and (!right_turn(lowerCH[lowerCH.size() - 2], lowerCH[lowerCH.size() - 1], points[n_points - i - 1])))
+            while (lowerCH.size() > 1 and (!right_turn(lowerCH[lowerCH.size() - 2], lowerCH[lowerCH.size() - 1], points[points.size() - i - 1])))
                 lowerCH.pop_back();
-            lowerCH.push_back(points[n_points - i - 1]);
+            lowerCH.push_back(points[points.size() - i - 1]);
         }
         cout << "Closest coil: " << endl;
         for (int i = 0; i < lowerCH.size(); i++)
