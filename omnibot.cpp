@@ -21,28 +21,26 @@ using namespace std;
 
 int main(){
 
-    double furthestcoil;
-    double closestcoil;
     double x;
     double y;
     double theta[100];
     double phi[100];
     int radius = 17;
     double coilAddress[300];
+    
     //Add test cases here
 
     pickMapping();
-    //findDistance();
-    //returnAngle();
+    findDistance();
 
-    cout << "What is the angle of the furthest coil?: ";
-    cin >> furthestcoil;
+    //cout << "What is the angle of the furthest coil?: ";
+    //cin >> furthestcoil;
 
-    cout << "What is the angle of the closest coil?: ";
-    cin >> closestcoil;
+    //cout << "What is the angle of the closest coil?: ";
+    //cin >> closestcoil;
 
-//	magOutput();
-    magOutput(furthestcoil, closestcoil);
+    //	magOutput();
+    //magOutput(furthestcoil, closestcoil);
 
 
 

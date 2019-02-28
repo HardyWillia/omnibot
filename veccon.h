@@ -18,13 +18,18 @@
 #include <cmath>
 #include <thread>
 #include <fstream>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 #define PI 3.14159265
 
-
+// Point in the xy-plane
+struct PointType{
     double x;
     double y;
+};
+
     double theta[100];
     double phi[100];
    // double theta;
@@ -38,7 +43,7 @@ using namespace std;
     double pickMapping(){
 
             int num = 0;
-	    double angle, result;
+	        double angle, result, x, y;
             double mapping[2];
             double mapping2[2] = {x, y};
             double mapping1[2] = {x, y};
@@ -113,43 +118,88 @@ using namespace std;
         //Check if it is a deadzone
         //If it is a deadzone, stall the program for () secs. Do not power on any coils
 
+    //Use convex hull algorithm to find x and y closest and furthest from the torso
+
+    // Sort criterion: points are sorted with respect to their x-coordinate.
+    //                 If two points have the same x-coordinate then we compare
+    //                 their y-coordinates
+    bool sortPoints(const PointType &lhs, const PointType &rhs) 
+    { 
+        return (lhs.x < rhs.x) || (lhs.x==rhs.x && lhs.y < rhs.y); 
+    }
+
+
+    // Check if three points make a right turn using cross product
+    bool right_turn(const PointType &P1, const PointType &P2, const PointType &P3)
+    {
+        return ((P3.x-P1.x)*(P2.y-P1.y) - (P3.y-P1.y)*(P2.x-P1.x)) > 0;
+    }
+
+
     double findDistance(){
 
-        // for(int i = 0; i < coilAddress[]; i++){
+        ifstream myfile;
+        int n_points;
+        PointType *points;
+        vector<PointType> lowerCH;
+        vector<PointType> upperCH;
+        
+        // reading data from file
+        myfile.open("coilcoordinates.txt");
+        
+        if(myfile.is_open())
+        {
+            myfile >> n_points;
+            points = new PointType[n_points];
+            
+            for(int i=0; i< n_points; i++)
+                myfile >> points[i].x >> points[i].y;
+            
+            myfile.close();
+        
+        
+            //Sorting points
+            sort(points, points + n_points, sortPoints);
+            cout << "Sorted Points\n";
+            for(int i = 0; i != n_points; ++i)
+                cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
+        
 
-        // }
-
+            //Computing upper convex hull
+            upperCH.push_back(points[0]);
+            upperCH.push_back(points[1]);
+            
+            for(int i=2; i<n_points; i++)
+            {
+                while(upperCH.size() > 1 and (!right_turn(upperCH[upperCH.size()-2],upperCH[upperCH.size()-1], points[i])))
+                    upperCH.pop_back();
+                upperCH.push_back(points[i]);
+            }
+            cout << "Furthest coil: " << endl;
+            for(int i=0; i < upperCH.size(); i++)
+                cout << "(" << upperCH[i].x << " , " << upperCH[i].y << ")" << endl;
+            
+            
+        
+            //Computing lower convex hull
+            lowerCH.push_back(points[n_points-1]);
+            lowerCH.push_back(points[n_points-2]);
+            
+            for(int i=2; i< n_points; i++)
+            {
+                while(lowerCH.size() > 1 and (!right_turn(lowerCH[lowerCH.size()-2],lowerCH[lowerCH.size()-1], points[n_points-i-1])))
+                    lowerCH.pop_back();
+                lowerCH.push_back(points[n_points-i-1]);
+            }
+            cout << "Closest coil: " << endl;
+            for(int i=0; i < lowerCH.size(); i++)
+                cout << "(" << lowerCH[i].x << " , " << lowerCH[i].y << ")" << endl;
+            
+        } 
     }
     
 
 
-
-    //2ND FUNCTION    
-    //Determine angle
-        //Check if x < 0
-            //If true, multiply x and y by -1
-            //Compute arctan(y/x) and add 180 to the result
-            //Return the angle
-        //Otherwise
-            //Computer arctan(y/x)
-            //Return the angle
- /*   double returnAngle(){
-        double angle, result;
-
-        if(x < 0){
-               result = (x * y) * -1;
-               result = atan(y/x) + 180;
-               angle = result;
-            }
-        else{
-            result = atan(y/x);
-            angle = result;
-        }
-        return angle;
-    }
-*/
-
-    //Output the result
 
 
 #endif /* VECCON_H */
