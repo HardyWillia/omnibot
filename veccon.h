@@ -209,7 +209,7 @@ double findDistance()
             upperCH.push_back(points[i]);
         }
         cout << "Furthest coil: " << endl;
-        cout << "(" << upperCH[upperCH.max_size() - 1].x << " , " << upperCH[upperCH.size() - 1].y << ")" << endl;
+        cout << "(" << upperCH[upperCH.size()-1].x << " , " << upperCH[upperCH.size()].y << ")" << endl;
 
         //Computing lower convex hull
         lowerCH.push_back(points[points.size() - 1]);
@@ -222,7 +222,8 @@ double findDistance()
             lowerCH.push_back(points[points.size() - i - 1]);
         }
         cout << "Closest coil: " << endl;
-        cout << "(" << lowerCH[lowerCH.size() - 1].x << " , " << lowerCH[lowerCH.max_size() - 1].y << ")" << endl;
+        for (int i = 0; i < lowerCH.size(); i++)
+            cout << "(" << lowerCH[i].x << " , " << lowerCH[i].y << ")" << endl;
     }
 }
 
