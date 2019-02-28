@@ -160,7 +160,7 @@ double findDistance()
 
     if (myfile.is_open())
     {
-        // myfile >> n_points;
+        //myfile >> n_points;
         //points = new PointType[999];
         vector<PointType> points;
         string line;
@@ -196,11 +196,14 @@ double findDistance()
         //sort(points, points + n_points, sortPoints);
         //cout << "Sorted Points\n";
         //for (int i = 0; i != n_points; ++i)
-          //  cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
+           // cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
+
 
         //Computing upper convex hull
         upperCH.push_back(points[0]);
         upperCH.push_back(points[1]);
+
+        cout << "Sorted points: " << sortPoints(points[0], points[1]) << endl; 
 
         for (int i = 2; i < points.size(); i++)
         {
