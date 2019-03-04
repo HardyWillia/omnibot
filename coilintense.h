@@ -183,12 +183,12 @@ using namespace std;
         farcoilforce *= intendvec / vecmag;
         closecoilforce *= intendvec / vecmag;
 
-        farcoilmag = farcoilforce;
-        closecoilmag = closecoilforce;
+        farcoilmag = abs(farcoilforce) * 100;
+        closecoilmag = abs(closecoilforce) * 100;
 
         //Used to check the magnitude for MIDTERM purposes
-        cout << farcoilmag << endl;
-        cout << closecoilmag << endl;
+        cout << "Intensity for furthest coil: " << farcoilmag << " %" << endl;
+        cout << "Intensity for furthest coil: " << closecoilmag << " %" << endl;
 
         return farcoilmag, closecoilmag;
     }
