@@ -4,6 +4,7 @@
 
     -Willia 02/11/19: Added file and commit format
     -Willia 02/26/19: Started to create test cases for program
+    -Willia 03/04/19: Removed need for file and changed to array
 
 
 

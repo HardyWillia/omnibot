@@ -5,7 +5,8 @@
 /* Last edit logs:
 
     -Willia 02/11/19: Added base pseudocode from diagram
-    -Willia 02/26/2019: Added function for computing magnitude
+    -Willia 02/26/19: Added function for computing magnitude
+    -Willia 03/04/19: Debugging the code to determine why the values are printing incorrectly
 
 
 
