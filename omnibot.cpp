@@ -21,27 +21,27 @@ using namespace std;
 
 int main(){
 
-    double x;
-    double y;
     double theta[100];
     double phi[100];
     int radius = 17;
-    double coilAddress[300];
+
     
     //Add test cases here
 
     pickMapping();
-    findDistance();
 
-    //cout << "What is the angle of the furthest coil?: ";
-    //cin >> furthestcoil;
-
-    //cout << "What is the angle of the closest coil?: ";
-    //cin >> closestcoil;
+    
+    PointType points[] = { { 0, 3 }, { 1, 1 }, { 2, 2 }, { 4, 4 }, { 0, 0 },
+            { 1, 2 }, { 3, 1 }, { 3, 3 } };
+    int n = sizeof(points) / sizeof(points[0]);
+    cout << "The points in the convex hull are: \n";
+    convexHull(points, n);
 
     //	magOutput();
     //magOutput(furthestcoil, closestcoil);
-
+    for(int i = 0; i < 50; i++){
+        magOutput(points[i], points[i+1]);
+    }
 
 
     return 0;

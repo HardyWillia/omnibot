@@ -26,130 +26,15 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <stack>
+#include <stdlib.h>
 
 using namespace std;
 #define PI 3.14159265
 
 
-//1ST FUNCTION
-//Find distance of every nearby coil within radial distance
-//Loop through addresses and add to a data structure
-//Determine coils that are within 1 to 3.5cm
 
-//Store all coils within that distance in a data structure
-//Check if it is a deadzone
-//If it is a deadzone, stall the program for () secs. Do not power on any coils
-
-
-// Point in the xy-plane
-struct PointType
-{
-    double x;
-    double y;
-};
-
-//Use convex hull algorithm to find x and y closest and furthest from the torso
-
-// Sort criterion: points are sorted with respect to their x-coordinate.
-//                 If two points have the same x-coordinate then we compare
-//                 their y-coordinates
-bool sortPoints(const PointType &lhs, const PointType &rhs)
-{
-    return (lhs.x < rhs.x) || (lhs.x == rhs.x && lhs.y < rhs.y);
-}
-
-// Check if three points make a right turn using cross product
-bool right_turn(const PointType &P1, const PointType &P2, const PointType &P3)
-{
-    return ((P3.x - P1.x) * (P2.y - P1.y) - (P3.y - P1.y) * (P2.x - P1.x)) > 0;
-}
-
-double findDistance()
-{
-
-    ifstream myfile;
-    //PointType *points;
-    vector<PointType> lowerCH;
-    vector<PointType> upperCH;
-
-    // reading data from file
-    myfile.open("coilcoordinates.txt");
-
-    if (myfile.is_open())
-    {
-        //myfile >> n_points;
-        //points = new PointType[999];
-        vector<PointType> points;
-        string line;
-        int row = 0;
-        while (getline(myfile, line))
-        {
-            std::stringstream ss(line);
-            std::string token;
-            int col = 1;
-
-            PointType point;
-            while (std::getline(ss, token, ' '))
-            {
-                if (col == 1)
-                {
-                    point.x = stod(token);
-                }
-                else
-                {
-                    point.y = stod(token);
-                }
-                col++;
-            }
-            points.push_back(point);
-            row++;
-        }
-        // for (int i = 0; i < n_points; i++)
-        //     myfile >> points[i].x >> points[i].y;
-
-        myfile.close();
-
-        //Sorting points
-        //sort(points, points + n_points, sortPoints);
-        //cout << "Sorted Points\n";
-        //for (int i = 0; i != n_points; ++i)
-           // cout << "(" << points[i].x << " , " << points[i].y << ")" << endl;
-
-
-        //Computing upper convex hull
-        upperCH.push_back(points[0]);
-        upperCH.push_back(points[1]);
-
-        for (int i = 2; i < points.size(); i++)
-        {
-            while (upperCH.size() > 1 and (!right_turn(upperCH[upperCH.size() - 2], upperCH[upperCH.size() - 1], points[i])))
-                upperCH.pop_back();
-            upperCH.push_back(points[i]);
-            cout << "Sorted points: " << sortPoints(points[i-2], points[i-1]) << endl; 
-        }
-        cout << "Furthest coil: " << endl;
-        cout << "(" << upperCH[upperCH.size()-1].x << " , " << upperCH[upperCH.size()].y << ")" << endl;
-
-        //Computing lower convex hull
-        lowerCH.push_back(points[points.size() - 1]);
-        lowerCH.push_back(points[points.size() - 2]);
-
-        for (int i = 2; i < points.size(); i++)
-        {
-            while (lowerCH.size() > 1 and (!right_turn(lowerCH[lowerCH.size() - 2], lowerCH[lowerCH.size() - 1], points[points.size() - i - 1])))
-                lowerCH.pop_back();
-            lowerCH.push_back(points[points.size() - i - 1]);
-        }
-        cout << "Closest coil: " << endl;
-        for (int i = 0; i < lowerCH.size(); i++)
-            cout << "(" << lowerCH[i].x << " , " << lowerCH[i].y << ")" << endl;
-    }
-}
-
-    double intendvec;
-
-
-    //2ND FUNCTION
+    //1ST FUNCTION
     //Intensify the furthest coil to 100%
     //Calculate the force of the closest coil
     //Calculate the current vector magnitude
@@ -157,8 +42,114 @@ double findDistance()
         //Get the magnitudes for each coil
     //Output the magnitudes (determines coil intensity for switching)
 
-    double magOutput(double theta, double phi){
+    // Points in the xy-plane
+    struct PointType
+    {
+        int x;
+        int y;
+    };
+
+    PointType p0;
+ 
+    // A utility function to find next to top in a stack
+    PointType nextToTop(stack<PointType> &S)
+    {
+        PointType p = S.top();
+        S.pop();
+        PointType res = S.top();
+        S.push(p);
+        return res;
+    }
+    
+    // A utility function to swap two points
+    int swap(PointType &p1, PointType &p2)
+    {
+        PointType temp = p1;
+        p1 = p2;
+        p2 = temp;
+    }
+    
+    // A utility function to return square of distance between p1 and p2
+    int dist(PointType p1, PointType p2)
+    {
+        return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
+    }
+    
+    int orientation(PointType p, PointType q, PointType r)
+    {
+        int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+    
+        if (val == 0)
+            return 0; // colinear
+        return (val > 0) ? 1 : 2; // clock or counterclock wise
+    }
+    
+    // A function used by library function qsort() to sort an array of
+    // points with respect to the first point
+    int compare(const void *vp1, const void *vp2)
+    {
+        PointType *p1 = (PointType *) vp1;
+        PointType *p2 = (PointType *) vp2;
+    
+        // Find orientation
+        double o = orientation(p0, *p1, *p2);
+        if (o == 0)
+            return (dist(p0, *p2) >= dist(p0, *p1)) ? -1 : 1;
+    
+        return (o == 2) ? -1 : 1;
+    }
+    
+    // Prints convex hull of a set of n points.
+    void convexHull(PointType points[], int n)
+    {
+        // Find the bottommost point
+        int ymin = points[0].y, min = 0;
+        for (int i = 1; i < n; i++)
+        {
+            int y = points[i].y;
+    
+            // Pick the bottom-most or chose the left most point in case of tie
+            if ((y < ymin) || (ymin == y && points[i].x < points[min].x))
+                ymin = points[i].y, min = i;
+        }
+    
+        // Place the bottom-most point at first position
+        swap(points[0], points[min]);
+    
+        // Sort n-1 points with respect to the first point.  A point p1 comes
+        // before p2 in sorted ouput if p2 has larger polar angle (in
+        // counterclockwise direction) than p1
+        p0 = points[0];
+        qsort(&points[1], n - 1, sizeof(PointType), compare);
+    
+        // Create an empty stack and push first three points to it.
+        stack<PointType> S;
+        S.push(points[0]);
+        S.push(points[1]);
+        S.push(points[2]);
+    
+        // Process remaining n-3 points
+        for (int i = 3; i < n; i++)
+        {
+            // Keep removing top while the angle formed by points next-to-top,
+            // top, and points[i] makes a non-left turn
+            while (orientation(nextToTop(S), S.top(), points[i]) != 2)
+                S.pop();
+            S.push(points[i]);
+        }
+    
+        // Now stack has the output points, print contents of stack
+        while (!S.empty())
+        {
+            PointType p = S.top();
+            cout << "(" << p.x << ", " << p.y << ")" << endl;
+            S.pop();
+        }
+    }
+
+    double magOutput(PointType theta, PointType phi){
 	
+        double intendvec;
         double farcoil;
         double farcoilforce;
         double closecoilforce;
@@ -167,19 +158,20 @@ double findDistance()
         double closecoilmag;
         int intensity;
 
-        farcoil = sin(theta) * 30;
-        closecoilforce = (sin(abs(theta) * 30))/(sin(abs(phi)));
+        farcoil = sin(theta.x) * 30;
+        closecoilforce = (sin(abs(theta.x) * 30))/(sin(abs(phi.y)));
 
-        /*
-            Max current 30A
-            Max voltage 10.4V 
-            Max wattage 304W
+                
+                /*
+                    Max current 30A
+                    Max voltage 10.4V 
+                    Max wattage 304W
 
-            **Will need at minimum 25% (76W) of intensity to power on a coil
-            100% = 304W
-            50% = 152W
-        */
-        vecmag = cos(abs(theta)) * max(farcoilforce, 100.0) + cos(abs(phi)) * (closecoilforce);
+                    **Will need at minimum 25% (76W) of intensity to power on a coil
+                    100% = 304W
+                    50% = 152W
+                */
+        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
 
 
         cout << "What is the intended vector: ";
