@@ -173,7 +173,7 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
+        vecmag = cos(abs(theta.x)) * farcoil + cos(abs(phi.y)) * (closecoilforce);
 
         //cout << "This is the vector magnitude: " << vecmag << endl;
 
