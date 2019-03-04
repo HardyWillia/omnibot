@@ -29,6 +29,7 @@
 #include <iterator>
 #include <stack>
 #include <stdlib.h>
+#include <iomanip>
 
 using namespace std;
 #define PI 3.14159265
@@ -187,8 +188,8 @@ using namespace std;
         closecoilmag = abs(closecoilforce) * 100;
 
         //Used to check the magnitude for MIDTERM purposes
-        cout << "Intensity for furthest coil: " << farcoilmag << " %" << endl;
-        cout << "Intensity for furthest coil: " << closecoilmag << " %" << endl;
+        cout << "Intensity for furthest coil: " << setprecision(1) << farcoilmag << "%" << endl;
+        cout << "Intensity for furthest coil: " << setprecision(1) << closecoilmag << "%" << endl;
 
         return farcoilmag, closecoilmag;
     }
