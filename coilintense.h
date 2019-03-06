@@ -15,6 +15,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <math.h>
 #include <cmath>
 #include <thread>
 #include <fstream>
@@ -97,7 +98,7 @@ using namespace std;
         //Used to check the magnitude for MIDTERM purposes
         //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
 
-        if(closecoilmag == NAN){
+        if(closecoilmag != closecoilmag){
             cout << "The vector cannot be re-created" << endl;
         } else {
             cout << "Intensity for furthest coil: " << "100%" << endl;
