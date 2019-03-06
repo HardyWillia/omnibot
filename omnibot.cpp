@@ -38,7 +38,7 @@ int main(){
             { 1, 2 }, { 3, 1 }, { 3, 3 } };
     for (int i = 0; i < 10; i++){
         for(int j = 0; j < i; j++){
-            cout << "Coil " << coilnum << " is coordinates: " << "(" << points[i].x << ", " << points[j].y1 << ")" << endl;
+            cout << "Coil " << coilnum << " is coordinates: " << "(" << points[i].x << ", " << points[j].y << ")" << endl;
             coilnum++;
         }
     }

@@ -49,6 +49,7 @@ using namespace std;
     struct PointType
     {
         double x;
+        double y;
         double y1;
         double y2;
     };
