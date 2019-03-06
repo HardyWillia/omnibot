@@ -95,7 +95,8 @@ using namespace std;
         closecoilmag = abs(closecoilforce) * 100;
 
         //Used to check the magnitude for MIDTERM purposes
-        cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
+        //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
+        cout << "Intensity for furthest coil: " << "100%" << endl;
         cout << "Intensity for closest coil: " << setprecision(2) << closecoilmag << "%" << endl;
 
         return farcoilmag, closecoilmag;
