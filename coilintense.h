@@ -98,10 +98,10 @@ using namespace std;
         //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
 
         if(closecoilmag == NAN){
-            cout << "The vector cannot be created" << endl;
-        } else{
+            cout << "The vector cannot be re-created" << endl;
+        } else {
             cout << "Intensity for furthest coil: " << "100%" << endl;
-            cout << "Intensity for closest coil: " << setprecision(2) << closecoilmag << "%" << endl;
+            cout << "Intensity for closest coil: " << setprecision(2) << closecoilmag << " %" << endl;
         }
 
         return farcoilmag, closecoilmag;
