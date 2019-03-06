@@ -31,22 +31,36 @@ int main(){
     
     //Add test cases here
 
-    pickMapping();
+    //pickMapping();
 
     //Points are on a 7x5 grid, some of the points are listed for testing    
     PointType points[] = { { 0, 3 }, { 1, 1 }, { 2, 2 }, { 3, 2 }, { 0, 0 },
             { 1, 2 }, { 3, 1 }, { 3, 3 } };
-    for (int i = 0; i < 10; i++){
-        for(int j = 0; j < i; j++){
-            cout << "Coil " << coilnum << " is coordinates: " << "(" << points[i].x << ", " << points[j].y << ")" << endl;
-            coilnum++;
-        }
-    }
 
+    // int pointsx[] = {0, 1, 2, 3, 0, 1, 3, 3};
+    // int pointsy[]  = {3, 1, 2, 2, 0, 2, 1, 3};
+    // int length = 5;
+    // int sumx = 0;
+    // int sumy = 0;
 
-    // for(int i = 0; i < 9; i++){
-    //     magOutput(points[i], points[i+1]);
+    // for(int a = 0; a < 10; a++){
+    //     sumx += pointsx[a];
+    //     sumy += pointsy[a];
     // }
+
+    
+
+    // for (int i = 0; i < 10; i++){
+    //     for(int j = 0; j < i; j++){
+    //         cout << "Coil " << coilnum << " is coordinates: " << "(" << points[i].x << ", " << points[j].y << ")" << endl;
+    //         coilnum++;
+    //     }
+    // }
+
+
+    for(int i = 0; i < 9; i++){
+        magOutput(points[i], points[i+1]);
+    }
 
 
     return 0;
