@@ -3,13 +3,9 @@
 #define COILINTENSE_H
 
 /* Last edit logs:
-
     -Willia 02/11/19: Added base pseudocode from diagram
     -Willia 02/26/19: Added function for computing magnitude
     -Willia 03/04/19: Debugging the code to determine why the values are printing incorrectly
-
-
-
 */
 
 #include <iostream>
@@ -49,7 +45,6 @@ using namespace std;
     struct PointType
     {
         double x;
-        double y;
         double y1;
         double y2;
     };
@@ -76,7 +71,6 @@ using namespace std;
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
-
                     **Will need at minimum 25% (76W) of intensity to power on a coil
                     100% = 304W
                     50% = 152W
@@ -99,7 +93,7 @@ using namespace std;
         //Used to check the magnitude for MIDTERM purposes
         //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
 
-        if(closecoilmag != closecoilmag){
+        if(closecoilmag != closecoilmag || closecoilmag > 100.0){
             cout << endl << "The vector cannot be re-created" << endl;
         } else {
             cout << "Intensity for furthest coil: " << "100%" << endl;
