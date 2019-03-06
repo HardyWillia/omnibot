@@ -63,7 +63,8 @@ double pickMapping()
                 cout << "Mapping 2 has been chosen." << endl;
                 if (x < 0)
                 {
-                    result = (x * y) * -1;
+                    x *= -1;
+                    y *= -1;
                     result = atan2(y, x) + 180;
                     angle = result;
                     cout << "X is less than 0, so the angle is: " << angle << endl;
@@ -88,7 +89,8 @@ double pickMapping()
                 cout << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
                 {
-                    result = (x * y) * -1;
+                    x *= -1;
+                    y *= -1;
                     result = atan2(y, x) + 180;
                     angle = result;
                     cout << "X is less than 0, so the angle is: " << angle << endl;
