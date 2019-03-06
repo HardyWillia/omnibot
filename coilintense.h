@@ -99,7 +99,7 @@ using namespace std;
         //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
 
         if(closecoilmag != closecoilmag || closecoilmag > 100.0){
-            cout << "The vector cannot be re-created" << endl;
+            cout << endl << "The vector cannot be re-created" << endl;
         } else {
             cout << "Intensity for furthest coil: " << "100%" << endl;
             cout << "Intensity for closest coil: " << setprecision(2) << closecoilmag << " %" << endl;
