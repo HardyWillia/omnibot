@@ -21,12 +21,12 @@
 using namespace std;
 
 
+
 int main(){
 
     double theta[100];
     double phi[100];
     int radius = 17;
-    int coilnum = 1;
 
     
     //Add test cases here
@@ -36,28 +36,12 @@ int main(){
     //Points are on a 7x5 grid, some of the points are listed for testing    
     PointType points[] = { { 0, 3 }, { 1, 1 }, { 2, 2 }, { 3, 2 }, { 0, 0 },
             { 1, 2 }, { 3, 1 }, { 3, 3 } };
+    //int n = sizeof(points) / sizeof(points[0]);
+    //cout << "The points in the convex hull are: \n";
+    //convexHull(points, n);
 
-    // int pointsx[] = {0, 1, 2, 3, 0, 1, 3, 3};
-    // int pointsy[]  = {3, 1, 2, 2, 0, 2, 1, 3};
-    // int length = 5;
-    // int sumx = 0;
-    // int sumy = 0;
-
-    // for(int a = 0; a < 10; a++){
-    //     sumx += pointsx[a];
-    //     sumy += pointsy[a];
-    // }
-
-    
-
-    // for (int i = 0; i < 10; i++){
-    //     for(int j = 0; j < i; j++){
-    //         cout << "Coil " << coilnum << " is coordinates: " << "(" << points[i].x << ", " << points[j].y << ")" << endl;
-    //         coilnum++;
-    //     }
-    // }
-
-
+    //	magOutput();
+    //magOutput(furthestcoil, closestcoil);
     for(int i = 0; i < 9; i++){
         magOutput(points[i], points[i+1]);
     }
