@@ -58,21 +58,23 @@ double pickMapping()
                 cout << "X and Y: " << endl
                      << x << endl
                      << y << endl;
+
+                mapping[2] = mapping2[2];
+                cout << "Mapping 2 has been chosen." << endl;
                 if (x < 0)
                 {
                     result = (x * y) * -1;
                     result = atan2(y, x) + 180;
                     angle = result;
+                    cout << "X is less than 0, so the angle is: " << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x);
                     angle = result;
+                    cout << "The angle is: " << angle << endl;
                 }
 
-                mapping[2] = mapping2[2];
-                cout << "Mapping 2 has been chosen" << endl;
-                cout << "The angle is: " << angle << endl;
                 ++num;
             }
             else
@@ -82,21 +84,22 @@ double pickMapping()
                 cout << "X and Y: " << endl
                      << x << endl
                      << y << endl;
+                mapping[2] = mapping1[2];
+                cout << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
                 {
                     result = (x * y) * -1;
                     result = atan2(y, x) + 180;
                     angle = result;
+                    cout << "X is less than 0, so the angle is: " << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x);
                     angle = result;
+                    cout << "The angle is: " << angle << endl;
                 }
 
-                mapping[2] = mapping1[2];
-                cout << "Mapping 1 has been chosen" << endl;
-                cout << "The angle is: " << angle << endl;
                 ++num;
             }
         }
