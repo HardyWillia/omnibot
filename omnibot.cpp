@@ -31,7 +31,7 @@ int main(){
     
     //Add test cases here
 
-    //pickMapping();
+    pickMapping();
 
     //Points are on a 7x5 grid, some of the points are listed for testing    
     PointType points[] = { { 0, 3 }, { 1, 1 }, { 2, 2 }, { 3, 2 }, { 0, 0 },
