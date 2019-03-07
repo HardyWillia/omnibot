@@ -66,13 +66,13 @@ double pickMapping()
                     x *= -1;
                     y *= -1;
                     //cout << "X and Y: " << endl << x << endl << y << endl;
-                    result = atan2(y, x) + 180;
-                    angle = result;
+                    result = atan2(y, x);
+                    angle = result * 180/PI;
                     cout << "X is less than 0, so the angle is: " << angle << endl;
                 }
                 else
                 {
-                    result = atan2(y, x);
+                    result = atan2(y, x) * 180/PI;
                     angle = result;
                     cout << "The angle is: " << angle << endl;
                 }
@@ -93,13 +93,13 @@ double pickMapping()
                     x *= -1;
                     y *= -1;
                     cout << "X and Y: " << endl << x << endl << y << endl;
-                    result = atan2(y, x) + 180;
-                    angle = result;
+                    result = atan2(y, x);
+                    angle = result * 180/PI;
                     //cout << "X is less than 0, so the angle is: " << angle << endl;
                 }
                 else
                 {
-                    result = atan2(y, x);
+                    result = atan2(y, x) * 180/PI;
                     angle = result;
                     cout << "The angle is: " << angle << endl;
                 }
