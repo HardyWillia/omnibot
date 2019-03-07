@@ -45,7 +45,6 @@ using namespace std;
     struct PointType
     {
         double x;
-        double x2;
         double y1;
         double y2;
     };
@@ -58,7 +57,7 @@ using namespace std;
 
     // A utility function to return square of distance between p1 and p2
     int dist(PointType p1, PointType p2){
-            return (p1.x2 - p2.x) * (p1.x2 - p2.x)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
+            return (p1.x - p2.x) * (p1.x - p2.x)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
     }
 
     //Find the furthest coil (set of points)
