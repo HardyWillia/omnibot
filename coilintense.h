@@ -44,7 +44,7 @@ using namespace std;
     // Points in the xy-plane
     struct PointType
     {
-        double x1;
+        double x;
         double x2;
         double y1;
         double y2;
@@ -58,7 +58,7 @@ using namespace std;
 
     // A utility function to return square of distance between p1 and p2
     int dist(PointType p1, PointType p2){
-            return (p1.x2 - p2.x1) * (p1.x2 - p2.x1)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
+            return (p1.x2 - p2.x) * (p1.x2 - p2.x)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
     }
 
     //Find the furthest coil (set of points)
@@ -106,8 +106,8 @@ using namespace std;
         double closecoilmag;
         int intensity[2];
 
-        farcoil = sin(theta.x1) * 30;
-        closecoilforce = (sin(abs(theta.x1) * 30))/(sin(abs(phi.y1)));
+        farcoil = sin(theta.x) * 30;
+        closecoilforce = (sin(abs(theta.x) * 30))/(sin(abs(phi.y1)));
 
                 
                 /*
@@ -118,7 +118,7 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-        vecmag = cos(abs(theta.x1)) * max(farcoilforce, 100.0) + cos(abs(phi.y2)) * (closecoilforce);
+        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y2)) * (closecoilforce);
 
         //cout << "This is the vector magnitude: " << vecmag << endl;
 

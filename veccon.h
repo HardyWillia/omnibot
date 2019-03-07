@@ -85,9 +85,9 @@ double pickMapping()
             {
                 x = theta[num];
                 y = phi[num];
-                cout << "X and Y: " << endl
-                     << x << endl
-                     << y << endl;
+                // cout << "X and Y: " << endl
+                //      << x << endl
+                //      << y << endl;
                 mapping[2] = mapping1[2];
                 cout << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
