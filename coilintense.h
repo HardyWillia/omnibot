@@ -44,17 +44,60 @@ using namespace std;
     // Points in the xy-plane
     struct PointType
     {
-        double x;
+        double x1;
+        double x2;
         double y1;
         double y2;
     };
-
-    PointType p0;
  
+    PointType points[] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{0,6},
+                           {1,0},{1,1},{1,2},{1,3},{1,4},{1,5},{1,6},
+                           {2,0},{2,1},{2,2},{2,3},{2,4},{2,5},{2,6},
+                           {3,0},{3,1},{3,2},{3,3},{3,4},{3,5},{3,6},
+                           {4,0},{4,1},{4,2},{4,3},{4,4},{4,5},{4,6}};
+
+    // A utility function to return square of distance between p1 and p2
+    int dist(PointType p1, PointType p2){
+            return (p1.x2 - p2.x1) * (p1.x2 - p2.x1)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
+    }
+
+    //Find the furthest coil (set of points)
+    int furthest(PointType current, PointType next){
+
+    }
+
+    //Find the furthest coil (set of points)
+   int closest(PointType current, PointType next){
+
+    }
 
     double magOutput(PointType theta, PointType phi){
 	
         double intendvec;
+        
+        //Code to name the furthest and closest coil. 
+        /*
+            Will be done after the midterm. This is only for coil identification purposes
+        */
+
+       /*
+        PointType currentCoil = points[2];
+        cout << "Where are you currently?: " << endl;
+        cin >> currentCoil.x1; 
+
+        for(int i=0; i<55; i++){
+
+            PointType testingCoil = points[i];
+
+            if(furthest(testingCoil, currentCoil)){
+                cout << "This is far" << testingCoil.y1 << " at i" << i;
+            }
+
+        }
+
+        */
+
+
         double farcoil;
         double farcoilforce;
         double closecoilforce;
@@ -63,8 +106,8 @@ using namespace std;
         double closecoilmag;
         int intensity[2];
 
-        farcoil = sin(theta.x) * 30;
-        closecoilforce = (sin(abs(theta.x) * 30))/(sin(abs(phi.y1)));
+        farcoil = sin(theta.x1) * 30;
+        closecoilforce = (sin(abs(theta.x1) * 30))/(sin(abs(phi.y1)));
 
                 
                 /*
@@ -75,7 +118,7 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y2)) * (closecoilforce);
+        vecmag = cos(abs(theta.x1)) * max(farcoilforce, 100.0) + cos(abs(phi.y2)) * (closecoilforce);
 
         //cout << "This is the vector magnitude: " << vecmag << endl;
 

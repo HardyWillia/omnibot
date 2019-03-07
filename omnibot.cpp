@@ -36,12 +36,7 @@ int main(){
     //Points are on a 7x5 grid, some of the points are listed for testing    
     PointType points[] = { { 0, 3 }, { 1, 1 }, { 2, 2 }, { 3, 2 }, { 0, 0 },
             { 1, 2 }, { 3, 1 }, { 3, 3 } };
-    //int n = sizeof(points) / sizeof(points[0]);
-    //cout << "The points in the convex hull are: \n";
-    //convexHull(points, n);
-
-    //	magOutput();
-    //magOutput(furthestcoil, closestcoil);
+            
     for(int i = 0; i < 9; i++){
         magOutput(points[i], points[i+1]);
     }

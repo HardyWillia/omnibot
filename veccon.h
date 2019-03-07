@@ -55,9 +55,9 @@ double pickMapping()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                cout << "X and Y: " << endl
-                     << x << endl
-                     << y << endl;
+                // cout << "X and Y: " << endl
+                //      << x << endl
+                //      << y << endl;
 
                 mapping[2] = mapping2[2];
                 cout << "Mapping 2 has been chosen." << endl;
@@ -94,7 +94,7 @@ double pickMapping()
                 {
                     x *= -1;
                     y *= -1;
-                    cout << "X and Y: " << endl << x << endl << y << endl;
+                    // cout << "X and Y: " << endl << x << endl << y << endl;
                     result = atan2(y, x);
                     angle = result * 180/PI;
                     if(angle < 0){
