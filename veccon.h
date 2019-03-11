@@ -70,13 +70,13 @@ double pickMapping()
                     if(angle < 0){
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << angle << endl;
+                    cout << "The angle is: " << setprecision(2) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180/PI;
                     angle = result;
-                    cout << "The angle is: " << angle << endl;
+                    cout << "The angle is: " << setprecision(2) << angle << endl;
                 }
 
                 ++num;
@@ -100,13 +100,13 @@ double pickMapping()
                     if(angle < 0){
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << angle << endl;
+                    cout << "The angle is: " << setprecision(2) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180/PI;
                     angle = result;
-                    cout << "The angle is: " << angle << endl;
+                    cout << "The angle is: " << setprecision(2) << angle << endl;
                 }
 
                 ++num;

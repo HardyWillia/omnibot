@@ -123,7 +123,7 @@ using namespace std;
 
         PointType ycoor1;
         PointType ycoor2;
-        cout << "What is the intended vector: ";
+        cout << "What is the intended vector (angle and magnitude): ";
         cin >> ycoor1.y1 >> ycoor2.y2;
 
         farcoilforce *= ycoor2.y2 / vecmag;
