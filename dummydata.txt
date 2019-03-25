@@ -2,6 +2,12 @@ phi and theta (comes in as double)
 theta (0 - pi)
 phi (0 - 2pi)
 
+current torso position: y-axis: 0.4-0.6
+                        x-axis: 0-0.9
+velocity: deg/s
+location: degrees from the hall effect (at the origin)
+torque vector is in Newton/meters
+
 // Points in the xy-plane
 struct PointType
 {

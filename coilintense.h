@@ -45,8 +45,8 @@ using namespace std;
     struct PointType
     {
         double x;
-        double y1;
-        double y2;
+        double y;
+        //double y2;
     };
  
     PointType points[] = { {0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{0,6},
@@ -57,7 +57,7 @@ using namespace std;
 
     // A utility function to return square of distance between p1 and p2
     int dist(PointType p1, PointType p2){
-            return (p1.x - p2.x) * (p1.x - p2.x)+ (p1.y2 - p2.y1) * (p1.y2 - p2.y1);
+            return (p1.x - p2.x) * (p1.x - p2.x)+ (p1.y - p2.y) * (p1.y - p2.y);
     }
 
     //Find the furthest coil (set of points)
@@ -106,7 +106,7 @@ using namespace std;
         int intensity[2];
 
         farcoil = sin(theta.x) * 30;
-        closecoilforce = (sin(abs(theta.x) * 30))/(sin(abs(phi.y1)));
+        closecoilforce = (sin(abs(theta.x) * 30))/(sin(abs(phi.y)));
 
                 
                 /*
@@ -117,23 +117,19 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y2)) * (closecoilforce);
-
-        //cout << "This is the vector magnitude: " << vecmag << endl;
+        vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
 
         PointType ycoor1;
         PointType ycoor2;
         cout << "What is the intended vector (angle and magnitude): ";
-        cin >> ycoor1.y1 >> ycoor2.y2;
+        cin >> ycoor1.y >> ycoor2.y;
 
-        farcoilforce *= ycoor2.y2 / vecmag;
-        closecoilforce *= ycoor1.y1 / vecmag;
+        farcoilforce *= ycoor2.y / vecmag;
+        closecoilforce *= ycoor1.y / vecmag;
 
         farcoilmag = abs(farcoilforce) * 100;
         closecoilmag = abs(closecoilforce) * 100;
 
-        //Used to check the magnitude for MIDTERM purposes
-        //cout << "Intensity for furthest coil: " << setprecision(2) << farcoilmag << "%" << endl;
 
         if(closecoilmag != closecoilmag || closecoilmag > 100.0){
             cout << endl << "The vector cannot be re-created" << endl;
