@@ -79,22 +79,22 @@ using namespace std;
             Will be done after the midterm. This is only for coil identification purposes
         */
 
-       /*
+       
         PointType currentCoil = points[2];
         cout << "Where are you currently?: " << endl;
-        cin >> currentCoil.x1; 
+        cin >> currentCoil.x; 
 
         for(int i=0; i<55; i++){
 
-            PointType testingCoil = points[i];
+            PointType next = points[i];
 
-            if(furthest(testingCoil, currentCoil)){
-                cout << "This is far" << testingCoil.y1 << " at i" << i;
+            if(furthest(next, currentCoil)){
+                cout << "This is far" << next.y << " at i" << i;
             }
 
         }
 
-        */
+        
 
 
         double farcoil;
