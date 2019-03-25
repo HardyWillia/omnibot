@@ -82,14 +82,14 @@ using namespace std;
        
         PointType currentCoil = points[2];
         cout << "Where are you currently?: " << endl;
-        cin >> currentCoil.x; 
+        cin >> currentCoil.x >> currentCoil.y; 
 
         for(int i=0; i<55; i++){
 
             PointType next = points[i];
 
             if(furthest(next, currentCoil)){
-                cout << "This is far" << next.y << " at i" << i;
+                cout << "This is far" << next.x << next.y << " at " << i;
             }
 
         }
