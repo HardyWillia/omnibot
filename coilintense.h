@@ -106,7 +106,7 @@ using namespace std;
             farcoilmag = abs(farcoilforce) * 100;
             closecoilmag = abs(closecoilforce) * 100;
 
-            if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+           /* if (closecoilmag != closecoilmag || closecoilmag > 100.0)
             {
                 cout << endl
                      << "The vector cannot be re-created" << endl;
@@ -117,6 +117,10 @@ using namespace std;
                      << "100%" << endl;
                 cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
             }
+            */
+            cout << "Intensity for furthest coil: "
+                 << "100%" << endl;
+            cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
         }
         return farcoilmag, closecoilmag;
     }
