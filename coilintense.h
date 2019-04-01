@@ -73,9 +73,9 @@ using namespace std;
 
         while (!myReadFile.eof())
         {
-
-            myReadFile >> p0.x >> p0.y;
-            points.push_back(PointType(p0.x, p0.y));
+            double x, y;
+            myReadFile >> x >> y;
+            points.push_back(PointType(x, y));
 
             //Code to identify the furthest and closest coil.
             int ymin = points[0].y, min = 0;
