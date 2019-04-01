@@ -46,7 +46,9 @@ using namespace std;
     {
         double x;
         double y;
-        //double y2;
+
+        PointType(double paramx, double paramy) : x(paramx), y(paramy) {}
+        
     }; PointType p0;
 
 
@@ -65,27 +67,35 @@ using namespace std;
         double farcoilmag;
         double closecoilmag;
         int intensity[2];
+        std::vector<PointType> points;
+        ifstream myReadFile;
+        myReadFile.open("coilcoordinates.txt");
 
-        std::vector<PointType> points = {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 5}, {2, 6}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}, {4, 6}};
-
-        //Code to identify the furthest and closest coil.
-        int ymin = points[0].y, min = 0;
-        int xmax = points[0].x, maximum = 0;
-
-        // Go through all points and find one with least y value
-        for (int i = 1; i < 29; i++)
+        while (!myReadFile.eof())
         {
-            int y = points[i].y;
 
-            if ((y < ymin) || (ymin == y && points[i].x < points[min].x)){
-                ymin = points[i].y, min = i;
-                xmax = points[i].x, maximum = i;
-            }
+            myReadFile >> p0.x >> p0.y;
+            points.push_back(PointType(p0.x, p0.y));
 
-            farcoil = sin(xmax) * 30;
-            closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
+            //Code to identify the furthest and closest coil.
+            int ymin = points[0].y, min = 0;
+            int xmax = points[0].x, maximum = 0;
 
-            /*
+            // Go through all points and find one with least y value
+            for (int i = 1; i < 29; i++)
+            {
+                int y = points[i].y;
+
+                if ((y < ymin) || (ymin == y && points[i].x < points[min].x))
+                {
+                    ymin = points[i].y, min = i;
+                    xmax = points[i].x, maximum = i;
+                }
+
+                farcoil = sin(xmax) * 30;
+                closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
+
+                /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -93,20 +103,20 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-            vecmag = cos(abs(xmax)) * 30 + cos(abs(ymin)) * (closecoilforce);
+                vecmag = cos(abs(xmax)) * 30 + cos(abs(ymin)) * (closecoilforce);
 
-            PointType ycoor1;
-            PointType ycoor2;
-            cout << "What is the intended vector (angle and magnitude): ";
-            cin >> ycoor1.y >> ycoor2.y;
+                int ycoor1;
+                int ycoor2;
+                cout << "What is the intended vector (angle and magnitude): ";
+                cin >> ycoor1 >> ycoor2;
 
-            farcoilforce *= ycoor2.y / vecmag;
-            closecoilforce *= ycoor1.y / vecmag;
+                farcoilforce *= ycoor2 / vecmag;
+                closecoilforce *= ycoor1 / vecmag;
 
-            farcoilmag = abs(farcoilforce) * 100;
-            closecoilmag = abs(closecoilforce) * 100;
+                farcoilmag = abs(farcoilforce) * 100;
+                closecoilmag = abs(closecoilforce) * 100;
 
-           /* if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+                /* if (closecoilmag != closecoilmag || closecoilmag > 100.0)
             {
                 cout << endl
                      << "The vector cannot be re-created" << endl;
@@ -118,10 +128,12 @@ using namespace std;
                 cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
             }
             */
-            cout << "Intensity for furthest coil: "
-                 << "100%" << endl;
-            cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+                cout << "Intensity for furthest coil: "
+                     << "100%" << endl;
+                cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+            }
         }
+        myReadFile.close();
         return farcoilmag, closecoilmag;
     }
 
