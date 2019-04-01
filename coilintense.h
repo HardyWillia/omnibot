@@ -80,11 +80,12 @@ using namespace std;
             if ((y < ymin) || (ymin == y && points[i].x < points[min].x)){
                 ymin = points[i].y, min = i;
                 xmax = points[i].x, maximum = i;
+            }
 
-                farcoil = sin(xmax) * 30;
-                closecoilforce = (sin(abs(xmax) * 30)) / (sin(abs(ymin)));
+            farcoil = sin(xmax) * 30;
+            closecoilforce = (sin(abs(xmax) * 30)) / (sin(abs(ymin)));
 
-                /*
+            /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -92,34 +93,32 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-                vecmag = cos(abs(xmax)) * max(farcoilforce, 100.0) + cos(abs(ymin)) * (closecoilforce);
+            vecmag = cos(abs(xmax)) * max(farcoilforce, 100.0) + cos(abs(ymin)) * (closecoilforce);
 
-                PointType ycoor1;
-                PointType ycoor2;
-                cout << "What is the intended vector (angle and magnitude): ";
-                cin >> ycoor1.y >> ycoor2.y;
+            PointType ycoor1;
+            PointType ycoor2;
+            cout << "What is the intended vector (angle and magnitude): ";
+            cin >> ycoor1.y >> ycoor2.y;
 
-                farcoilforce *= ycoor2.y / vecmag;
-                closecoilforce *= ycoor1.y / vecmag;
+            farcoilforce *= ycoor2.y / vecmag;
+            closecoilforce *= ycoor1.y / vecmag;
 
-                farcoilmag = abs(farcoilforce) * 100;
-                closecoilmag = abs(closecoilforce) * 100;
+            farcoilmag = abs(farcoilforce) * 100;
+            closecoilmag = abs(closecoilforce) * 100;
 
-                if (closecoilmag != closecoilmag || closecoilmag > 100.0)
-                {
-                    cout << endl
-                         << "The vector cannot be re-created" << endl;
-                }
-                else
-                {
-                    cout << "Intensity for furthest coil: "
-                         << "100%" << endl;
-                    cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
-                }
+            if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+            {
+                cout << endl
+                     << "The vector cannot be re-created" << endl;
             }
-            return farcoilmag, closecoilmag;
+            else
+            {
+                cout << "Intensity for furthest coil: "
+                     << "100%" << endl;
+                cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+            }
         }
-
+        return farcoilmag, closecoilmag;
     }
 
 
