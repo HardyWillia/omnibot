@@ -65,7 +65,6 @@ using namespace std;
         double farcoilmag;
         double closecoilmag;
         int intensity[2];
-        int n;
 
         std::vector<PointType> points = {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 5}, {2, 6}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}, {4, 6}};
 
@@ -74,7 +73,7 @@ using namespace std;
         int xmax = points[0].x, maximum = 0;
 
         // Go through all points and find one with least y value
-        for (int i = 1; i < points.size(); i++)
+        for (int i = 1; i < 29; i++)
         {
             int y = points[i].y;
 
