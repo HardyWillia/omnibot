@@ -89,6 +89,8 @@ using namespace std;
                 {
                     ymin = points[i].y, min = i;
                     xmax = points[i].x, maximum = i;
+                    cout << ymin << endl;
+                    cout << xmax << endl;
 
                     farcoil = sin(xmax) * 30;
                     closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
