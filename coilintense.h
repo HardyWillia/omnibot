@@ -74,7 +74,7 @@ using namespace std;
         int xmax = points[0].x, maximum = 0;
 
         // Go through all points and find one with least y value
-        for (int i = 1; i < n; i++)
+        for (int i = 1; i < points.size(); i++)
         {
             int y = points[i].y;
 
