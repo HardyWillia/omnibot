@@ -117,11 +117,9 @@ using namespace std;
                     cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
                 }
             }
-
+            return farcoilmag, closecoilmag;
         }
 
-
-        return farcoilmag, closecoilmag;
     }
 
 
