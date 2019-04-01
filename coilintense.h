@@ -55,7 +55,7 @@ using namespace std;
             return (p1.x - p2.x) * (p1.x - p2.x)+ (p1.y - p2.y) * (p1.y - p2.y);
     }
 
-    double magOutput(PointType theta, PointType phi){
+    double magOutput(){
 	
         double intendvec;
         double farcoil;
@@ -68,7 +68,7 @@ using namespace std;
         int n;
 
         std::vector<PointType> points = {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 5}, {2, 6}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}, {4, 6}};
-        
+
         //Code to identify the furthest and closest coil.
         int ymin = points[0].y, min = 0;
         int xmax = points[0].x, maximum = 0;
@@ -81,7 +81,6 @@ using namespace std;
             if ((y < ymin) || (ymin == y && points[i].x < points[min].x)){
                 ymin = points[i].y, min = i;
                 xmax = points[i].x, maximum = i;
-            }
 
                 farcoil = sin(xmax) * 30;
                 closecoilforce = (sin(abs(xmax) * 30)) / (sin(abs(ymin)));
@@ -95,6 +94,8 @@ using namespace std;
                     50% = 152W
                 */
                 vecmag = cos(abs(xmax)) * max(farcoilforce, 100.0) + cos(abs(ymin)) * (closecoilforce);
+            }
+
         }
 
     
@@ -114,7 +115,7 @@ using namespace std;
             cout << endl << "The vector cannot be re-created" << endl;
         } else {
             cout << "Intensity for furthest coil: " << "100%" << endl;
-            cout << "Intensity for closest coil: " << xmax << ", " << ymin << "at: " << setprecision(2) << closecoilmag << " %" << endl;
+            cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
         }
 
         return farcoilmag, closecoilmag;
