@@ -49,7 +49,7 @@ using namespace std;
 
         PointType(double paramx, double paramy) : x(paramx), y(paramy) {}
         
-    }; PointType p0;
+    };
 
 
     // A utility function to return square of distance between p1 and p2
@@ -84,18 +84,16 @@ using namespace std;
             // Go through all points and find one with least y value
             for (int i = 1; i < 29; i++)
             {
-                int y = points[i].y;
 
                 if ((y < ymin) || (ymin == y && points[i].x < points[min].x))
                 {
                     ymin = points[i].y, min = i;
                     xmax = points[i].x, maximum = i;
-                }
 
-                farcoil = sin(xmax) * 30;
-                closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
+                    farcoil = sin(xmax) * 30;
+                    closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
 
-                /*
+                    /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -103,7 +101,9 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-                vecmag = cos(abs(xmax)) * 30 + cos(abs(ymin)) * (closecoilforce);
+                    vecmag = cos(abs(xmax)) * 30 + cos(abs(ymin)) * (closecoilforce);
+                }
+
 
                 int ycoor1;
                 int ycoor2;
@@ -128,9 +128,9 @@ using namespace std;
                 cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
             }
             */
-                cout << "Intensity for furthest coil: "
+                cout << "Intensify the furthest coil at: "
                      << "100%" << endl;
-                cout << "Intensity for closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+                cout << "Intensify the closest coil: " << xmax << ", " << ymin << " at: " << setprecision(2) << closecoilmag << " %" << endl;
             }
         }
         myReadFile.close();
