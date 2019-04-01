@@ -1,0 +1,51 @@
+#define SINDEG(a)(sin(a*PI/180))
+#define COSDEG(a)(cos(a*PI/180))
+    
+    double v_x, v_y; //velocity variables
+    double v_x_rel, v_y_rel; //relative velocity variables
+    double w;
+    
+    double x, y; //actual x and y
+    double theta; // current angle
+
+    LocationCalculator(double _R, double _theta_a, double _theta_b, double _theta_c,
+                       double *_v_a, double *_v_b, double *_v_c){
+        R = _R;
+
+        theta_a = _theta_a;
+        theta_b = _theta_b;
+        theta_c = _theta_c;
+
+        v_a = _v_a;
+        v_b = _v_b;
+        v_c = _v_c;
+
+        s_a = SINDEG(theta_a);  c_a = COSDEG(theta_a);
+        s_b = SINDEG(theta_b);  c_b = COSDEG(theta_b);
+        s_c = SINDEG(theta_c);  c_c = COSDEG(theta_c);
+
+        /* matrix stuff */
+
+        det = (c_c*s_a - c_b*s_a + c_a*s_b - c_c*s_b + c_b*s_c - c_a*s_c);
+    }
+    void update(unsigned long _dt, double rot){
+        v_x_rel = (c_b - c_c) * (*v_a) 
+                + (c_c - c_a) * (*v_b) 
+                + (c_a - c_b) * (*v_c);
+
+        v_x_rel /= det;
+
+        v_y_rel = (s_b - s_c) * (*v_a) 
+                + (s_c - s_a) * (*v_b) 
+                + (s_a - s_b) * (*v_c);
+
+        v_y_rel /= det;
+
+        // first transform velocities to real coordinates.
+        v_x = COSDEG(rot) * v_x_rel - SINDEG(rot) * v_y_rel;
+        v_y = SINDEG(rot) * v_x_rel + COSDEG(rot) * v_y_rel;
+
+        // now integrate
+        x += v_x * _dt / 1000000;
+        y += v_y * _dt / 1000000;
+    }
