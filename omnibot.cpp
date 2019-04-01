@@ -31,7 +31,7 @@ int main(){
     
     //Add test cases here
 
-    pickMapping();
+    //pickMapping();
 
     magOutput();
 

@@ -83,7 +83,7 @@ using namespace std;
             }
 
             farcoil = sin(xmax) * 30;
-            closecoilforce = (sin(abs(xmax) * 30)) / (sin(abs(ymin)));
+            closecoilforce = (sin(abs(xmax)) * 30) / (sin(abs(ymin)));
 
             /*
                     Max current 30A
@@ -93,7 +93,7 @@ using namespace std;
                     100% = 304W
                     50% = 152W
                 */
-            vecmag = cos(abs(xmax)) * max(farcoilforce, 100.0) + cos(abs(ymin)) * (closecoilforce);
+            vecmag = cos(abs(xmax)) * 30 + cos(abs(ymin)) * (closecoilforce);
 
             PointType ycoor1;
             PointType ycoor2;
