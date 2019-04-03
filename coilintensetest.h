@@ -23,7 +23,6 @@
 #include <list>
 #include <string>
 #include <sstream>
-#include <algorithm>
 #include <iterator>
 #include <stack>
 #include <stdlib.h>
@@ -67,11 +66,11 @@ using Iterator = std::vector<PointType>::iterator;
 unsigned minimal_distance_naive(Iterator first, Iterator last)
 {
     pairs closest{*first, *std::next(first)};
-    for (auto out = first; out != last; ++out)
+    for (Iterator out = first; out != last; ++out)
     {
         pairs temp;
         temp.first = *out;
-        for (auto in = std::next(out); in != last; ++in)
+        for (Iterator in = std::next(out); in != last; ++in)
         {
             temp.second = *in;
             closest = std::min(closest, temp, [](const auto &lhs, const auto &rhs) {
