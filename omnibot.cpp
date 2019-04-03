@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 #include "veccon.h"
-#include "coilintense.h"
+#include "coilintensetest.h"
 
 using namespace std;
 
@@ -24,23 +24,17 @@ using namespace std;
 
 int main(){
 
-    double theta[100];
-    double phi[100];
+    //double theta[100];
+    //double phi[100];
     int radius = 17;
 
     
     //Add test cases here
 
     //pickMapping();
-    //Points are on a 7x5 grid, some of the points are listed for testing
-    PointType points[] = {{0, 3}, {1, 1}, {2, 2}, {3, 2}, {0, 0}, {1, 2}, {3, 1}, {3, 3}};
-
-    for (int i = 0; i < 9; i++)
-    {
-        magOutput(points[i], points[i + 1]);
-    }
-
     //magOutput();
+
+    magOutput();
 
 
     return 0;
