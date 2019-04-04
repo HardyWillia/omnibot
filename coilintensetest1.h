@@ -81,7 +81,6 @@ double magOutput(pairll pnts[], int n)
 
     string line;
     ifstream datafile("data.txt");
-    ifstream coordfile("coilcoordinates.txt");
 
     if (datafile.is_open())
     {
@@ -141,16 +140,16 @@ double magOutput(pairll pnts[], int n)
                     100% = 304W
                     50% = 152W
                 */
-                    vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
+                    vecmag = cos(abs(theta.x)) * max(farcoil, 100.0) + cos(abs(phi.y)) * (closecoilforce);
 
                     int intendedmag;
                     cout << "What is the intended vector magnitude: ";
                     cin >> intendedmag;
 
-                    farcoilforce *= intendedmag / vecmag;
-                    closecoilforce *= angle / vecmag;
+                    //farcoilforce *= intendedmag / vecmag;
+                    closecoilforce *= intendedmag / vecmag;
 
-                    farcoilmag = abs(farcoilforce) * 100;
+                    //farcoilmag = abs(farcoilforce) * 100;
                     closecoilmag = abs(closecoilforce) * 100;
 
                     cout << "Intensify the furthest coil at: "
@@ -209,16 +208,16 @@ double magOutput(pairll pnts[], int n)
                     100% = 304W
                     50% = 152W
                 */
-                    vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
+                    vecmag = cos(abs(theta.x)) * max(farcoil, 100.0) + cos(abs(phi.y)) * (closecoilforce);
 
                     int intendedmag;
                     cout << "What is the intended vector magnitude: ";
                     cin >> intendedmag;
 
-                    farcoilforce *= intendedmag / vecmag;
-                    closecoilforce *= angle / vecmag;
+                    //farcoilforce *= intendedmag / vecmag;
+                    closecoilforce *= intendedmag / vecmag;
 
-                    farcoilmag = abs(farcoilforce) * 100;
+                    //farcoilmag = abs(farcoilforce) * 100;
                     closecoilmag = abs(closecoilforce) * 100;
 
                     cout << "Intensify the furthest coil at: "
