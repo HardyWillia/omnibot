@@ -143,8 +143,7 @@ double magOutput(pairll pnts[], int n)
 
                     if (closecoilmag != closecoilmag || closecoilmag > 100.0)
                     {
-                        cout << endl
-                             << "The vector cannot be re-created" << endl;
+                        cout << "The vector cannot be re-created" << endl;
                     }
                     else {
 
@@ -215,8 +214,7 @@ double magOutput(pairll pnts[], int n)
 
                     if (closecoilmag != closecoilmag || closecoilmag > 100.0)
                     {
-                        cout << endl
-                             << "The vector cannot be re-created" << endl;
+                        cout << "The vector cannot be re-created" << endl;
                     }
                     else
                     {
