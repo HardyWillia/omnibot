@@ -7,22 +7,18 @@
     -Willia 02/26/19: Added function for computing magnitude
     -Willia 03/04/19: Debugging the code to determine why the values are printing incorrectly
     -Willia 04/01/19: Added coilintensetest as a test program for further improvements
+    -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
+
 */
 
 #include <iostream>
-#include <stdio.h>
 #include <string>
 #include <math.h>
-#include <cmath>
-#include <thread>
 #include <fstream>
 #include <algorithm>
 #include <vector>
-#include <list>
 #include <string>
-#include <sstream>
 #include <iterator>
-#include <stack>
 #include <stdlib.h>
 #include <iomanip>
 #include <set>
@@ -32,7 +28,6 @@ using namespace std;
 #define px second
 #define py first
 
-//1ST FUNCTION
 //Intensify the furthest coil to 100%
 //Calculate the force of the closest coil
 //Calculate the current vector magnitude
@@ -44,6 +39,7 @@ using namespace std;
 typedef pair<long long, long long> pairll;
 //vector<std::pair<long long, long long>> pnts[40];
 pairll pnts[40];
+int radius = 17;
 int compare(pairll a, pairll b)
 {
     return a.px < b.px;
