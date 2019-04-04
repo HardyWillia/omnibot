@@ -122,7 +122,7 @@ double magOutput(int n)
 
                     if (currentposx > 7)
                     {
-                        currentposx = 1;
+                        currentposx == 1;
                     }
                     else
                     {
@@ -212,7 +212,7 @@ double magOutput(int n)
                     cin >> currentposx >> currentposy;
 
                     if(currentposx > 7){
-                            currentposx = 1;
+                            currentposx == 1;
                     } else {
                         currentposx += 1;
                     }
