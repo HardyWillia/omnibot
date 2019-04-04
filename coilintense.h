@@ -17,8 +17,6 @@
 #include <thread>
 #include <fstream>
 #include <algorithm>
-#include "veccon.h"
-
 #include <vector>
 #include <list>
 #include <string>
