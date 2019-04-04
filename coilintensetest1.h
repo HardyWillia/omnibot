@@ -42,21 +42,14 @@ using namespace std;
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
 
-// Points in the xy-plane
-struct PointType
-{
-    int x;
-    int y;
 
-};
-
+// Points in the cartesian plane
 typedef pair<long long, long long> pairll;
 pairll pnts[29];
 int compare(pairll a, pairll b)
 {
     return a.px < b.px;
 }
-
 
 double magOutput(pairll pnts[], int n)
 {
@@ -70,7 +63,6 @@ double magOutput(pairll pnts[], int n)
     double farcoilmag;
     double closecoilmag;
     int intensity[2];
-    std::vector<PointType> points;
 
     int num = 0;
     double angle, result, x, y;
@@ -146,15 +138,20 @@ double magOutput(pairll pnts[], int n)
                     cout << "What is the intended vector magnitude: ";
                     cin >> intendedmag;
 
-                    //farcoilforce *= intendedmag / vecmag;
                     closecoilforce *= intendedmag / vecmag;
-
-                    //farcoilmag = abs(farcoilforce) * 100;
                     closecoilmag = abs(closecoilforce) * 100;
+
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+                    {
+                        cout << endl
+                             << "The vector cannot be re-created" << endl;
+                    }
+                    else {
 
                     cout << "Intensify the furthest coil at: "
                          << "100%" << endl;
-                    cout << "Intensify the closest coil " << best << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+                    cout << "Intensify the closest coil at position: " << best << " to " << setprecision(2) << closecoilmag << " %" << endl;
+                    }
                 }
             }
             else
@@ -167,7 +164,6 @@ double magOutput(pairll pnts[], int n)
                 {
                     x *= -1;
                     y *= -1;
-                    // cout << "X and Y: " << endl << x << endl << y << endl;
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
@@ -214,15 +210,21 @@ double magOutput(pairll pnts[], int n)
                     cout << "What is the intended vector magnitude: ";
                     cin >> intendedmag;
 
-                    //farcoilforce *= intendedmag / vecmag;
                     closecoilforce *= intendedmag / vecmag;
-
-                    //farcoilmag = abs(farcoilforce) * 100;
                     closecoilmag = abs(closecoilforce) * 100;
 
-                    cout << "Intensify the furthest coil at: "
-                         << "100%" << endl;
-                    cout << "Intensify the closest coil " << best << " at: " << setprecision(2) << closecoilmag << " %" << endl;
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+                    {
+                        cout << endl
+                             << "The vector cannot be re-created" << endl;
+                    }
+                    else
+                    {
+
+                        cout << "Intensify the furthest coil at: "
+                             << "100%" << endl;
+                        cout << "Intensify the closest coil at position: " << best << " to " << setprecision(2) << closecoilmag << " %" << endl;
+                    }
                 }
             }
         }
