@@ -13,4 +13,6 @@
 -   Attributed to the OmnibotCoilIntensity class:
 ![Coil Intensity Diagram](images/coilintensity.png)
 
-Run the program with sudo g++ -std=c++11 -o omnibot omnibot.cpp
+Run the program with 
+- g++ -std=c++11 -fmax-errors=7 omnibot.cpp -o omnibot 
+- ./omnibot
