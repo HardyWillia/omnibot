@@ -60,8 +60,8 @@ int compare(pairll a, pairll b)
 
 double magOutput(pairll pnts[], int n)
 {
-    double theta;
-    double phi;
+    double theta[100];
+    double phi[100];
     double intendvec;
     double farcoil;
     double farcoilforce;
@@ -86,11 +86,11 @@ double magOutput(pairll pnts[], int n)
     {
         while (getline(datafile, line))
         {
-            datafile >> theta >> phi;
-            if (theta > PI / 4)
+            datafile >> theta[num] >> phi[num];
+            if (theta[num] > PI / 4)
             {
-                x = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * cos(phi);
-                y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
+                x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
+                y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
 
                 mapping[2] = mapping2[2];
                 cout << "Mapping 2 has been chosen." << endl;
@@ -129,8 +129,8 @@ double magOutput(pairll pnts[], int n)
                         best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
                     box.insert(pnts[i]);
 
-                    farcoil = sin(theta) * 30;
-                    closecoilforce = (sin(abs(theta) * 30)) / (sin(abs(phi)));
+                    farcoil = sin(theta[num]) * 30;
+                    closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
 
                     /*
                     Max current 30A
@@ -140,7 +140,7 @@ double magOutput(pairll pnts[], int n)
                     100% = 304W
                     50% = 152W
                 */
-                    vecmag = cos(abs(theta)) * max(farcoil, 100.0) + cos(abs(phi)) * (closecoilforce);
+                    vecmag = cos(abs(theta[num])) * max(farcoil, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
                     int intendedmag;
                     cout << "What is the intended vector magnitude: ";
@@ -159,8 +159,8 @@ double magOutput(pairll pnts[], int n)
             }
             else
             {
-                x = theta;
-                y = phi;
+                x = theta[num];
+                y = phi[num];
                 mapping[2] = mapping1[2];
                 cout << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
@@ -197,8 +197,8 @@ double magOutput(pairll pnts[], int n)
                         best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
                     box.insert(pnts[i]);
 
-                    farcoil = sin(theta) * 30;
-                    closecoilforce = (sin(abs(theta) * 30)) / (sin(abs(phi)));
+                    farcoil = sin(theta[num]) * 30;
+                    closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
 
                     /*
                     Max current 30A
@@ -208,7 +208,7 @@ double magOutput(pairll pnts[], int n)
                     100% = 304W
                     50% = 152W
                 */
-                    vecmag = cos(abs(theta)) * max(farcoil, 100.0) + cos(abs(phi)) * (closecoilforce);
+                    vecmag = cos(abs(theta[num])) * max(farcoil, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
                     int intendedmag;
                     cout << "What is the intended vector magnitude: ";
