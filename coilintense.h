@@ -1,4 +1,4 @@
-//Coil Intensity Program
+//Coil Intensity Test Program
 #ifndef COILINTENSE_H
 #define COILINTENSE_H
 
@@ -6,7 +6,7 @@
     -Willia 02/11/19: Added base pseudocode from diagram
     -Willia 02/26/19: Added function for computing magnitude
     -Willia 03/04/19: Debugging the code to determine why the values are printing incorrectly
-    -Willia 04/01/19: Created a new file for testing coil identification
+    -Willia 04/01/19: Added coilintensetest as a test program for further improvements
 */
 
 #include <iostream>
@@ -23,14 +23,16 @@
 #include <list>
 #include <string>
 #include <sstream>
-#include <algorithm>
 #include <iterator>
 #include <stack>
 #include <stdlib.h>
 #include <iomanip>
+#include <set>
 
 using namespace std;
 #define PI 3.14159265
+#define px second
+#define py first
 
 //1ST FUNCTION
 //Intensify the furthest coil to 100%
@@ -40,57 +42,20 @@ using namespace std;
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
 
-// Points in the xy-plane
-struct PointType
+// Points in the cartesian plane
+typedef pair<long long, long long> pairll;
+//vector<std::pair<long long, long long>> pnts[40];
+pairll pnts[40];
+int compare(pairll a, pairll b)
 {
-    double x;
-    double y;
-    //double y2;
-};
-
-PointType points[] = {{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 5}, {2, 6}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {4, 0}, {4, 1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}, {4, 6}};
-
-// A utility function to return square of distance between p1 and p2
-int dist(PointType p1, PointType p2)
-{
-    return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
+    return a.px < b.px;
 }
 
-//Find the furthest coil (set of points)
-int furthest(PointType current, PointType next)
+double magOutput(pairll pnts[], int n)
 {
-}
-
-//Find the furthest coil (set of points)
-int closest(PointType current, PointType next)
-{
-}
-
-double magOutput(PointType theta, PointType phi)
-{
-
+    double theta[100];
+    double phi[100];
     double intendvec;
-
-    //Code to name the furthest and closest coil.
-    /*
-            Will be done after the midterm. This is only for coil identification purposes
-        */
-
-    PointType currentCoil = points[2];
-    cout << "Where are you currently?: " << endl;
-    cin >> currentCoil.x >> currentCoil.y;
-
-    for (int i = 0; i < 55; i++)
-    {
-
-        PointType next = points[i];
-
-        if (furthest(next, currentCoil))
-        {
-            cout << "This is far" << next.x << next.y << " at " << i;
-        }
-    }
-
     double farcoil;
     double farcoilforce;
     double closecoilforce;
@@ -99,10 +64,67 @@ double magOutput(PointType theta, PointType phi)
     double closecoilmag;
     int intensity[2];
 
-    farcoil = sin(theta.x) * 30;
-    closecoilforce = (sin(abs(theta.x) * 30)) / (sin(abs(phi.y)));
+    int num = 0;
+    double angle, result, x, y;
+    double mapping[2];
+    double mapping2[2] = {x, y};
+    double mapping1[2] = {x, y};
 
-    /*
+    string line;
+    ifstream datafile("data.txt");
+
+    if (datafile.is_open())
+    {
+        while (getline(datafile, line))
+        {
+            datafile >> theta[num] >> phi[num];
+            if (theta[num] > PI / 4)
+            {
+                x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
+                y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+
+                mapping[2] = mapping2[2];
+                cout << endl
+                     << "Mapping 2 has been chosen." << endl;
+                if (x < 0)
+                {
+                    x *= -1;
+                    y *= -1;
+                    result = atan2(y, x);
+                    angle = result * 180 / PI;
+                    if (angle < 0)
+                    {
+                        angle = angle + 180;
+                    }
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                }
+                else
+                {
+                    result = atan2(y, x) * 180 / PI;
+                    angle = result;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                }
+
+                ++num;
+
+                //Sort through the coordinates to find the closest to a given point
+                sort(pnts, pnts + n, compare);
+                double best = INFINITY;
+                set<pairll> box;
+                box.insert(pnts[0]);
+                int left = 0;
+                for (int i = 1; i < n; ++i)
+                {
+                    while (left < i && pnts[i].px - pnts[left].px > best)
+                        box.erase(pnts[left++]);
+                    for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
+                        best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
+                    box.insert(pnts[i]);
+
+                    farcoil = sin(theta[num]) * 30;
+                    closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+
+                    /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -110,32 +132,113 @@ double magOutput(PointType theta, PointType phi)
                     100% = 304W
                     50% = 152W
                 */
-    vecmag = cos(abs(theta.x)) * max(farcoilforce, 100.0) + cos(abs(phi.y)) * (closecoilforce);
+                    vecmag = cos(abs(theta[num])) * max(farcoil, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
-    PointType ycoor1;
-    PointType ycoor2;
-    cout << "What is the intended vector (angle and magnitude): ";
-    cin >> ycoor1.y >> ycoor2.y;
+                    int intendedmag;
+                    cout << "What is the intended vector magnitude: ";
+                    cin >> intendedmag;
 
-    farcoilforce *= ycoor2.y / vecmag;
-    closecoilforce *= ycoor1.y / vecmag;
+                    closecoilforce *= intendedmag / vecmag;
+                    closecoilmag = abs(closecoilforce) * 100;
 
-    farcoilmag = abs(farcoilforce) * 100;
-    closecoilmag = abs(closecoilforce) * 100;
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+                    {
+                        cout << "The vector cannot be re-created" << endl;
+                    }
+                    else if (closecoilmag == 0.0)
+                    {
+                        cout << "Only intensify the furthest coil to 100%" << endl;
+                    }
+                    else
+                    {
 
-    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
-    {
-        cout << endl
-             << "The vector cannot be re-created" << endl;
+                        cout << "Intensify the furthest coil to: "
+                             << "100%" << endl;
+                        cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
+                    }
+                }
+            }
+            else
+            {
+                x = theta[num];
+                y = phi[num];
+                mapping[2] = mapping1[2];
+                cout << endl
+                     << "Mapping 1 has been chosen" << endl;
+                if (x < 0)
+                {
+                    x *= -1;
+                    y *= -1;
+                    result = atan2(y, x);
+                    angle = result * 180 / PI;
+                    if (angle < 0)
+                    {
+                        angle = angle + 180;
+                    }
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                }
+                else
+                {
+                    result = atan2(y, x) * 180 / PI;
+                    angle = result;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                }
+
+                //Sort through the coordinates to find the closest to a given point
+                sort(pnts, pnts + n, compare);
+                double best = INFINITY;
+                set<pairll> box;
+                box.insert(pnts[0]);
+                int left = 0;
+                for (int i = 1; i < n; ++i)
+                {
+                    while (left < i && pnts[i].px - pnts[left].px > best)
+                        box.erase(pnts[left++]);
+                    for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
+                        best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
+                    box.insert(pnts[i]);
+
+                    farcoil = sin(theta[num]) * 30;
+                    closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+
+                    /*
+                    Max current 30A
+                    Max voltage 10.4V 
+                    Max wattage 304W
+                    **Will need at minimum 25% (76W) of intensity to power on a coil
+                    100% = 304W
+                    50% = 152W
+                */
+                    vecmag = cos(abs(theta[num])) * max(farcoil, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+
+                    int intendedmag;
+                    cout << "What is the intended vector magnitude: ";
+                    cin >> intendedmag;
+
+                    closecoilforce *= intendedmag / vecmag;
+                    closecoilmag = abs(closecoilforce) * 100;
+
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+                    {
+                        cout << "The vector cannot be re-created" << endl;
+                    }
+                    else if (closecoilmag == 0.0)
+                    {
+                        cout << "Only intensify the furthest coil to 100%" << endl;
+                    }
+                    else
+                    {
+
+                        cout << "Intensify the furthest coil to: "
+                             << "100%" << endl;
+                        cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
+                    }
+                }
+            }
+        }
+        datafile.close();
     }
     else
-    {
-        cout << "Intensity for furthest coil: "
-             << "100%" << endl;
-        cout << "Intensity for closest coil: " << setprecision(2) << closecoilmag << " %" << endl;
-    }
-
-    return farcoilmag, closecoilmag;
+        cout << "Unable to open file";
 }
-
 #endif /* COILINTENSE_H */

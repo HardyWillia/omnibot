@@ -1,6 +1,6 @@
 //Coil Intensity Test Program
-#ifndef COILINTENSETEST1_H
-#define COILINTENSETEST1_H
+#ifndef COILINTENSE_H
+#define COILINTENSE_H
 
 /* Last edit logs:
     -Willia 02/11/19: Added base pseudocode from diagram
@@ -45,6 +45,7 @@ using namespace std;
 
 // Points in the cartesian plane
 typedef pair<long long, long long> pairll;
+//vector<std::pair<long long, long long>> pnts[40];
 pairll pnts[40];
 int compare(pairll a, pairll b)
 {
