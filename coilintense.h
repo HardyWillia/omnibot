@@ -120,7 +120,14 @@ double magOutput(int n)
                     cout << "What is your current position: ";
                     cin >> currentposx >> currentposy;
 
-                    currentposx += 1;
+                    if (currentposx > 7)
+                    {
+                        currentposx = 1;
+                    }
+                    else
+                    {
+                        currentposx += 1;
+                    }
 
                     farcoil = sin(theta[num]) * 30;
                     closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
@@ -204,7 +211,11 @@ double magOutput(int n)
                     cout << "What is your current position: ";
                     cin >> currentposx >> currentposy;
 
-                    currentposx += 1;
+                    if(currentposx > 7){
+                            currentposx = 1;
+                    } else {
+                        currentposx += 1;
+                    }
 
                     farcoil = sin(theta[num]) * 30;
                     closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
