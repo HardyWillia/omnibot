@@ -85,7 +85,7 @@ double magOutput(pairll pnts[], int n)
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
 
                 mapping[2] = mapping2[2];
-                cout << "Mapping 2 has been chosen." << endl;
+                cout << endl << "Mapping 2 has been chosen." << endl;
                 if (x < 0)
                 {
                     x *= -1;
@@ -150,7 +150,7 @@ double magOutput(pairll pnts[], int n)
 
                     cout << "Intensify the furthest coil at: "
                          << "100%" << endl;
-                    cout << "Intensify the closest coil at position: " << best << " to " << setprecision(2) << closecoilmag << " %" << endl;
+                    cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
                     }
                 }
             }
@@ -159,7 +159,7 @@ double magOutput(pairll pnts[], int n)
                 x = theta[num];
                 y = phi[num];
                 mapping[2] = mapping1[2];
-                cout << "Mapping 1 has been chosen" << endl;
+                cout << endl << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
                 {
                     x *= -1;
@@ -223,7 +223,7 @@ double magOutput(pairll pnts[], int n)
 
                         cout << "Intensify the furthest coil at: "
                              << "100%" << endl;
-                        cout << "Intensify the closest coil at position: " << best << " to " << setprecision(2) << closecoilmag << " %" << endl;
+                        cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
                     }
                 }
             }
