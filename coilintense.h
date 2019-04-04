@@ -16,17 +16,12 @@
 #include <math.h>
 #include <fstream>
 #include <algorithm>
-#include <vector>
 #include <string>
-#include <iterator>
 #include <stdlib.h>
 #include <iomanip>
-#include <set>
 
 using namespace std;
 #define PI 3.14159265
-#define px second
-#define py first
 
 //Intensify the furthest coil to 100%
 //Calculate the force of the closest coil
@@ -36,14 +31,6 @@ using namespace std;
 //Output the magnitudes (determines coil intensity for switching)
 
 // Points in the cartesian plane
-typedef pair<long long, long long> pairll;
-//vector<std::pair<long long, long long>> pnts[40];
-pairll pnts[40];
-int radius = 17;
-int compare(pairll a, pairll b)
-{
-    return a.px < b.px;
-}
 
 double magOutput(int n)
 {
@@ -57,6 +44,7 @@ double magOutput(int n)
     double farcoilmag;
     double closecoilmag;
     int intensity[2];
+    int radius;
 
     int num = 0;
     double angle, result, x, y;
@@ -102,20 +90,11 @@ double magOutput(int n)
                 ++num;
 
                 //Sort through the coordinates to find the closest to a given point
-                // sort(pnts, pnts + n, compare);
                 int currentposx;
                 int currentposy;
-                // double best = INFINITY;
-                // set<pairll> box;
-                // box.insert(pnts[0]);
-                // int left = 0;
+
                 for (int i = 1; i < n; ++i)
                 {
-                    // while (left < i && pnts[i].px - pnts[left].px > best)
-                    //     box.erase(pnts[left++]);
-                    // for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
-                    //     best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
-                    // box.insert(pnts[i]);
 
                     cout << "What is your current position: ";
                     cin >> currentposx >> currentposy;
@@ -193,20 +172,11 @@ double magOutput(int n)
                 }
 
                 //Sort through the coordinates to find the closest to a given point
-                // sort(pnts, pnts + n, compare);
                 int currentposx;
                 int currentposy;
-                // double best = INFINITY;
-                // set<pairll> box;
-                // box.insert(pnts[0]);
-                // int left = 0;
+
                 for (int i = 1; i < n; ++i)
                 {
-                    // while (left < i && pnts[i].px - pnts[left].px > best)
-                    //     box.erase(pnts[left++]);
-                    // for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
-                    //     best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
-                    // box.insert(pnts[i]);
 
                     cout << "What is your current position: ";
                     cin >> currentposx >> currentposy;
