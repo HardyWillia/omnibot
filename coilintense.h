@@ -186,18 +186,25 @@ double magOutput(int n)
                 }
 
                 //Sort through the coordinates to find the closest to a given point
-                sort(pnts, pnts + n, compare);
-                double best = INFINITY;
-                set<pairll> box;
-                box.insert(pnts[0]);
-                int left = 0;
+                // sort(pnts, pnts + n, compare);
+                int currentposx;
+                int currentposy;
+                // double best = INFINITY;
+                // set<pairll> box;
+                // box.insert(pnts[0]);
+                // int left = 0;
                 for (int i = 1; i < n; ++i)
                 {
-                    while (left < i && pnts[i].px - pnts[left].px > best)
-                        box.erase(pnts[left++]);
-                    for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
-                        best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
-                    box.insert(pnts[i]);
+                    // while (left < i && pnts[i].px - pnts[left].px > best)
+                    //     box.erase(pnts[left++]);
+                    // for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
+                    //     best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
+                    // box.insert(pnts[i]);
+
+                    cout << "What is your current position: ";
+                    cin >> currentposx >> currentposy;
+
+                    currentposx += 1;
 
                     farcoil = sin(theta[num]) * 30;
                     closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
@@ -232,7 +239,9 @@ double magOutput(int n)
 
                         cout << "Intensify the furthest coil to: "
                              << "100%" << endl;
-                        cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
+                        cout << "Intensify the closest coil at position "
+                             << "(" << currentposx << ", " << currentposy << ")"
+                             << " to: " << setprecision(2) << closecoilmag << " %" << endl;
                     }
                 }
             }
