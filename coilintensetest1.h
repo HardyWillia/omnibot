@@ -126,7 +126,7 @@ double magOutput(pairll pnts[], int n)
                 {
                     while (left < i && pnts[i].px - pnts[left].px > best)
                         box.erase(pnts[left++]);
-                    for (typeof(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
+                    for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
                         best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
                     box.insert(pnts[i]);
 
@@ -194,7 +194,7 @@ double magOutput(pairll pnts[], int n)
                 {
                     while (left < i && pnts[i].px - pnts[left].px > best)
                         box.erase(pnts[left++]);
-                    for (typeof(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
+                    for (decltype(box.begin()) it = box.lower_bound(make_pair(pnts[i].py - best, pnts[i].px - best)); it != box.end() && pnts[i].py + best >= it->py; it++)
                         best = min(best, sqrt(pow(pnts[i].py - it->py, 2.0) + pow(pnts[i].px - it->px, 2.0)));
                     box.insert(pnts[i]);
 
