@@ -1,0 +1,3 @@
+#ignore the directories not needed for running the code
+.vscode/
+build/
