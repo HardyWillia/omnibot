@@ -145,7 +145,7 @@ double magOutput(pairll pnts[], int n)
                     {
                         cout << "The vector cannot be re-created" << endl;
                     } 
-                    else if(closecoilmag = 0.0)
+                    else if(closecoilmag == 0.0)
                     {
                         cout << "Only intensify the furthest coil to 100%" << endl;
                     }
@@ -220,7 +220,7 @@ double magOutput(pairll pnts[], int n)
                     {
                         cout << "The vector cannot be re-created" << endl;
                     }
-                    else if (closecoilmag = 0.0)
+                    else if (closecoilmag == 0.0)
                     {
                         cout << "Only intensify the furthest coil to 100%" << endl;
                     }
