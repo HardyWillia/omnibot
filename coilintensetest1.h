@@ -45,7 +45,7 @@ using namespace std;
 
 // Points in the cartesian plane
 typedef pair<long long, long long> pairll;
-pairll pnts[29];
+pairll pnts[40];
 int compare(pairll a, pairll b)
 {
     return a.px < b.px;
@@ -144,10 +144,14 @@ double magOutput(pairll pnts[], int n)
                     if (closecoilmag != closecoilmag || closecoilmag > 100.0)
                     {
                         cout << "The vector cannot be re-created" << endl;
+                    } 
+                    else if(closecoilmag = 0.0)
+                    {
+                        cout << "Only intensify the furthest coil to 100%" << endl;
                     }
                     else {
 
-                    cout << "Intensify the furthest coil at: "
+                    cout << "Intensify the furthest coil to: "
                          << "100%" << endl;
                     cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
                     }
@@ -216,10 +220,14 @@ double magOutput(pairll pnts[], int n)
                     {
                         cout << "The vector cannot be re-created" << endl;
                     }
+                    else if (closecoilmag = 0.0)
+                    {
+                        cout << "Only intensify the furthest coil to 100%" << endl;
+                    }
                     else
                     {
 
-                        cout << "Intensify the furthest coil at: "
+                        cout << "Intensify the furthest coil to: "
                              << "100%" << endl;
                         cout << "Intensify the closest coil at position " << best << " to: " << setprecision(2) << closecoilmag << " %" << endl;
                     }
