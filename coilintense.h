@@ -168,13 +168,13 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << setprecision(3) << angle << static_cast<unsigned char>(248) << endl;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    cout << "The angle is: " << setprecision(3) << angle << static_cast<unsigned char>(248) << endl;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
             }
@@ -197,13 +197,13 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << setprecision(3) << angle << static_cast<unsigned char>(248) << endl;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    cout << "The angle is: " << setprecision(3) << angle << static_cast<unsigned char>(248) << endl;
+                    cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
             }
             cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
