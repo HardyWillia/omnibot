@@ -149,8 +149,6 @@ double magOutput()
                 {
                     x *= -1;
                     y *= -1;
-                    cout << "X: " << x << endl;
-                    cout << "Y: " << y << endl;
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
@@ -173,8 +171,6 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
-                cout << "X: " << x << endl;
-                cout << "Y: " << y << endl;
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
@@ -182,8 +178,6 @@ double magOutput()
                 {
                     x *= -1;
                     y *= -1;
-                    cout << "X: " << x << endl;
-                    cout << "Y: " << y << endl;
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
