@@ -88,10 +88,10 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-        vecmag = cos(theta[num] * -1) * 100.0 + cos(abs(phi[num])) * (closecoilforce);
+        vecmag = cos(abs(theta[num])) * 100.0 + cos(abs(phi[num])) * (closecoilforce);
 
         int intendedmag;
-        printf ("What is the intended vector magnitude: \n");
+        printf ("What is the intended vector magnitude: ");
         scanf("%d", &intendedmag);
 
         //farcoilforce *= intendedmag/vecmag;
@@ -111,13 +111,13 @@ void currentposition(int currentposx, int currentposy){
         //  }
         else if (closecoilmag == 0.0)
         {
-            printf("ONLY intensify the furthest coil at position (%d, %d) to: %0.2lf\n", farposx, farposy, 100.0);
+            printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
             //farcoilmag == 100.0;
         }
         else
         {
 
-            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lf\n", farposx, farposy, 100.0);
+            printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
 
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
@@ -206,9 +206,9 @@ double magOutput()
                 printf("The angle is: %0.1lf\n", angle);
             }
         }
-        printf("Your current position: (%lf , %lf) \n", x, y);
         int a = x;
         int b = y;
+        printf("Your current position: (%d , %d) \n", x, y);
         currentposition(a, b);
         ++num;
         }
