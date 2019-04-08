@@ -166,7 +166,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
-                currentposition(x, y);
+                //currentposition(x, y);
             }
 
             else
@@ -195,8 +195,8 @@ double magOutput()
                     angle = abs(result);
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
-                currentposition(x, y);
             }
+            currentposition(x, y);
             ++num;
         }
         datafile.close();
