@@ -13,12 +13,8 @@
 
 #include <string.h>
 #include <stdio.h>
-//#include <iostream>
 #include <math.h>
-//#include <fstream>
-//#include <algorithm>
 #include <stdlib.h>
-//#include <iomanip>
 
 #define PI 3.14159265
 
@@ -94,9 +90,9 @@ void currentposition(int currentposx, int currentposy){
 
         vecmag = cos(theta[num] * -1) * 100.0 + cos(abs(phi[num])) * (closecoilforce);
 
-        int intendedmag = 56;
-        //cout << "What is the intended vector magnitude: ";
-        //cin >> intendedmag;
+        int intendedmag;
+        printf ("What is the intended vector magnitude: \n");
+        scanf("%d", intendedmag);
 
         //farcoilforce *= intendedmag/vecmag;
         //farcoilmag = abs(farcoilforce) * 100;
@@ -106,30 +102,28 @@ void currentposition(int currentposx, int currentposy){
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
         {
-                //cout << "The vector cannot be re-created" << endl;
+            printf("The vector cannot be re-created\n");
             break;
         }
-        // if (farcoilmag != farcoilmag || farcoilmag > 100.0)
-        // {
-        //     cout << "The vector cannot be re-created" << endl;
-        // }
+        //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+        //  {
+        //         printf ( "The vector cannot be re-created\n");
+        //  }
         else if (closecoilmag == 0.0)
         {
-            //cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << " to 100%" << endl;
-            farcoilmag == 100.0;
+            printf("ONLY intensify the furthest coil at position (%lf, %lf) to: %0.2lfc\n", farposx, farposy, 100);
+            //farcoilmag == 100.0;
         }
         else
         {
-               
-//            cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
-//                 << " to 100%" << endl;
 
-            // cout << "Intensify the furthest coil (" << farposx << ", " << farposy << ")"
-            //      << " to: "
-            //      << setprecision(2) << farcoilmag << "%" << endl;
-//            cout << "Intensify the closest coil at position "
-//                 << "(" << currentposx << ", " << currentposy << ")"
-//                 << " to: " << setprecision(2) << closecoilmag << " %" << endl;
+            printf("Intensify the furthest coil at position (%lf, %lf) to: %0.2lfc\n", farposx, farposy, 100);
+
+            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
+            //       " to: "
+            //       setprecision(2)  farcoilmag  "%"  "\n";
+            printf ( "Intensify the closest coil at position (%lf, %lf) to: %0.2lfc\n", currentposx, currentposy, closecoilmag);
+
         }
     }
 }
@@ -163,8 +157,8 @@ double magOutput()
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
 
                 mapping[2] = mapping2[2];
-//                cout << endl
-//                     << "Mapping 2 has been chosen." << endl;
+                printf("\nMapping 2 has been chosen\n");
+
                 if (x < 0)
                 {
                     x *= -1;
@@ -175,15 +169,14 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-//                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                    printf("The angle is: %0.2lf\n", angle);
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    //cout << "The angle is: " << setprecision(3) << angle << endl;
+                    printf("The angle is: %0.2lf\n", angle);
                 }
-
             }
 
             else
@@ -192,8 +185,7 @@ double magOutput()
                 x = theta[num];
                 y = phi[num];
                 mapping[2] = mapping1[2];
-//                cout << endl
-//                     << "Mapping 1 has been chosen" << endl;
+                printf ( "\nMapping 1 has been chosen\n");
                 if (x < 0)
                 {
                     x *= -1;
@@ -204,16 +196,16 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-                    //cout << "The angle is: " << setprecision(3) << angle << endl;
+                    printf("The angle is: %0.2lf\n", angle);
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    //cout << "The angle is: " << setprecision(3) << angle << endl;
+                    printf ( "The angle is: %0.2lf\n", angle);
                 }
             }
-            //cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
+            printf ("Your current position: (%lf , %lf) \n", x,  y);
             currentposition(x, y);
             ++num;
         }
