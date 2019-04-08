@@ -111,18 +111,18 @@ void currentposition(int currentposx, int currentposy){
         //  }
         else if (closecoilmag == 0.0)
         {
-            printf("ONLY intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100.0);
+            printf("ONLY intensify the furthest coil at position (%d, %d) to: %0.2lf\n", farposx, farposy, 100.0);
             //farcoilmag == 100.0;
         }
         else
         {
 
-            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100.0);
+            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lf\n", farposx, farposy, 100.0);
 
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
             //       setprecision(2)  farcoilmag  "%"  "\n";
-            printf ( "Intensify the closest coil at position (%d, %d) to: %0.2lfc\n", currentposx, currentposy, closecoilmag);
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.2lf\n", currentposx, currentposy, closecoilmag);
 
         }
     }
@@ -207,7 +207,9 @@ double magOutput()
             }
         }
         printf("Your current position: (%lf , %lf) \n", x, y);
-        currentposition(x, y);
+        int a = x;
+        int b = y;
+        currentposition(a, b);
         ++num;
         }
     fclose(fp);
