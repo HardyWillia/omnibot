@@ -45,6 +45,9 @@ double magOutput(int n)
     double closecoilmag;
     int intensity[2];
     int radius;
+    int currentposx;
+    int currentposy;
+    
 
     int num = 0;
     double angle, result, x, y;
@@ -168,8 +171,6 @@ double magOutput(int n)
                 {
                     x *= -1;
                     y *= -1;
-                    int currentposx = int(x);
-                    int currentposy = int(y);
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
@@ -186,6 +187,7 @@ double magOutput(int n)
                 }
 
                 //Sort through the coordinates to find the closest to a given point
+
                 for (int i = 1; i < n; ++i)
                 {
 
