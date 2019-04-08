@@ -145,8 +145,8 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                currentposx = int(x);
-                currentposy = int(y);
+                currentposx = x;
+                currentposy = y;
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -178,8 +178,8 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
-                currentposx = int(x);
-                currentposy = int(y);
+                currentposx = x;
+                currentposy = y;
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
