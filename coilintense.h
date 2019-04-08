@@ -99,7 +99,7 @@ void currentposition(int currentposx, int currentposy){
         cout << "What is the intended vector magnitude: ";
         cin >> intendedmag;
 
-        farcoilforce *= intendedmag/vecmag;
+        //farcoilforce *= intendedmag/vecmag;
         farcoilmag = abs(farcoilforce) * 100;
 
         closecoilforce *= intendedmag / vecmag;
@@ -107,9 +107,11 @@ void currentposition(int currentposx, int currentposy){
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
         {
-            if(farcoilmag != farcoilmag || farcoilmag > 100.0){
                 cout << "The vector cannot be re-created" << endl;
-            }
+        }
+        if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+        {
+            cout << "The vector cannot be re-created" << endl;
         }
         else if (closecoilmag == 0.0)
         {
