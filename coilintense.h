@@ -137,7 +137,7 @@ double magOutput()
             datafile >> theta[num] >> phi[num];
 
             //Conditions for Mapping 2 (Bullseye)
-            if (theta[num] > PI / 4)
+            if (theta[num] < PI / 4)
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
