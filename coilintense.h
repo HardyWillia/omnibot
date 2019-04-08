@@ -140,7 +140,7 @@ double magOutput()
     char datafile[] = "data.txt";
 
     fp = fopen(datafile, "r");
-    if (fp != NULL)
+    if (fp == NULL)
     {
                perror("Error while opening the file.\n");
                exit(EXIT_FAILURE);
