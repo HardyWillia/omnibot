@@ -170,13 +170,13 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.2lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
                 result = atan2(y, x) * 180 / PI;
                 angle = abs(result);
-                printf("The angle is: %0.2lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
         }
 
@@ -197,13 +197,13 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.2lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
                 result = atan2(y, x) * 180 / PI;
                 angle = abs(result);
-                printf("The angle is: %0.2lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
         }
         printf("Your current position: (%lf , %lf) \n", x, y);
