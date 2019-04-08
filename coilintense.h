@@ -144,17 +144,17 @@ double magOutput(int n)
                     cout << "What is the intended vector magnitude: ";
                     cin >> intendedmag;
 
-                    farcoilforce *= intendedmag/vecmag;
+                    farcoilforce *= intendedmag / vecmag;
                     farcoilmag = abs(farcoilforce) * 100;
 
                     closecoilforce *= intendedmag / vecmag;
                     closecoilmag = abs(closecoilforce) * 100;
 
-                    if (closecoilmag != closecoilmag || closecoilmag > 100.0 || farcoilmag != farcoilmag || farcoilmag > 100.0)
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
                     {
                         cout << "The vector cannot be re-created" << endl;
                     }
-                    else if (closecoilmag == 0.0 || farcoil == 0.0)
+                    else if (closecoilmag == 0.0)
                     {
                         cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")"
                              << "to 100%" << endl;
@@ -255,11 +255,11 @@ double magOutput(int n)
                     closecoilforce *= intendedmag / vecmag;
                     closecoilmag = abs(closecoilforce) * 100;
 
-                    if (closecoilmag != closecoilmag || closecoilmag > 100.0 || farcoilmag != farcoilmag || farcoilmag > 100.0)
+                    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
                     {
                         cout << "The vector cannot be re-created" << endl;
                     }
-                    else if (closecoilmag == 0.0 || farcoil == 0.0)
+                    else if (closecoilmag == 0.0)
                     {
                         cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << "to 100%" << endl;
                     }
