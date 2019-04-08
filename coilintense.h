@@ -38,9 +38,6 @@ int radius;
 
 int num = 0;
 double angle, result, x, y;
-double mapping[2];
-double mapping2[2] = {x, y};
-double mapping1[2] = {x, y};
 
 
 //Intensify the furthest coil to 100%
@@ -127,6 +124,9 @@ void currentposition(int currentposx, int currentposy){
 double magOutput()
 {
 
+    double mapping[2];
+    double mapping2[2] = {x, y};
+    double mapping1[2] = {x, y};
     string line;
     ifstream datafile("data.txt");
 
@@ -141,8 +141,6 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                cout << "X: "<< x << endl;
-                cout << "Y: " << y << endl;
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -151,6 +149,8 @@ double magOutput()
                 {
                     x *= -1;
                     y *= -1;
+                    cout << "X: " << x << endl;
+                    cout << "Y: " << y << endl;
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
@@ -173,6 +173,8 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
+                cout << "X: " << x << endl;
+                cout << "Y: " << y << endl;
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
@@ -180,6 +182,8 @@ double magOutput()
                 {
                     x *= -1;
                     y *= -1;
+                    cout << "X: " << x << endl;
+                    cout << "Y: " << y << endl;
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
