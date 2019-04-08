@@ -135,7 +135,7 @@ double magOutput()
     double mapping[2];
     double mapping2[2] = {x, y};
     double mapping1[2] = {x, y};
-    char line;
+    char *line;
     FILE *fp;
     char datafile[] = "data.txt";
 
@@ -146,7 +146,7 @@ double magOutput()
                exit(EXIT_FAILURE);
         
     }
-    while (*fgets(line, sizeof(line), fp))
+    while (fgets(line, sizeof(line), fp))
     {
 
         fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
