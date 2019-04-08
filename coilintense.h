@@ -100,7 +100,7 @@ void currentposition(int currentposx, int currentposy){
         cin >> intendedmag;
 
         //farcoilforce *= intendedmag/vecmag;
-        farcoilmag = abs(farcoilforce) * 100;
+        //farcoilmag = abs(farcoilforce) * 100;
 
         closecoilforce *= intendedmag / vecmag;
         closecoilmag = abs(closecoilforce) * 100;
@@ -109,10 +109,10 @@ void currentposition(int currentposx, int currentposy){
         {
                 cout << "The vector cannot be re-created" << endl;
         }
-        if (farcoilmag != farcoilmag || farcoilmag > 100.0)
-        {
-            cout << "The vector cannot be re-created" << endl;
-        }
+        // if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+        // {
+        //     cout << "The vector cannot be re-created" << endl;
+        // }
         else if (closecoilmag == 0.0)
         {
             cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << " to 100%" << endl;
@@ -120,12 +120,12 @@ void currentposition(int currentposx, int currentposy){
         else
         {
 
-            // cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
-            //      << " to 100%" << endl;
+            cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
+                 << " to 100%" << endl;
 
-            cout << "Intensify the furthest coil (" << farposx << ", " << farposy << ")"
-                 << " to: "
-                 << setprecision(2) << farcoilmag << "%" << endl;
+            // cout << "Intensify the furthest coil (" << farposx << ", " << farposy << ")"
+            //      << " to: "
+            //      << setprecision(2) << farcoilmag << "%" << endl;
             cout << "Intensify the closest coil at position "
                  << "(" << currentposx << ", " << currentposy << ")"
                  << " to: " << setprecision(2) << closecoilmag << " %" << endl;
