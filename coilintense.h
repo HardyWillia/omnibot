@@ -141,6 +141,8 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+                cout << "X: "<< x << endl;
+                cout << "Y: " << y << endl;
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -164,8 +166,6 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
-                cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
-                currentposition(x, y);
             }
 
             else
