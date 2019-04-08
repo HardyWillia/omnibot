@@ -83,7 +83,7 @@ double magOutput(int n)
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
-                    angle = result;
+                    angle = abs(result);
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
@@ -180,7 +180,7 @@ double magOutput(int n)
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
-                    angle = result;
+                    angle = abs(result);
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
