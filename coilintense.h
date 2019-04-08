@@ -52,6 +52,8 @@ double angle, result, x, y;
 void currentposition(int currentposx, int currentposy){
 
     int n = 2;
+    int farposx = abs(6 - currentposx);
+    int farposy = abs(5 - currentposy);
 
     //Sort through the coordinates to find the closest to a given point
     for (int i = 1; i < n; ++i)
@@ -97,6 +99,9 @@ void currentposition(int currentposx, int currentposy){
         cout << "What is the intended vector magnitude: ";
         cin >> intendedmag;
 
+        farcoilforce *= intendedmag/vecmag;
+        farcoilmag = abs(farcoilforce) * 100;
+
         closecoilforce *= intendedmag / vecmag;
         closecoilmag = abs(closecoilforce) * 100;
 
@@ -106,13 +111,17 @@ void currentposition(int currentposx, int currentposy){
         }
         else if (closecoilmag == 0.0)
         {
-            cout << "Only intensify the furthest coil to 100%" << endl;
+            cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << " to 100%" << endl;
         }
         else
         {
 
-            cout << "Intensify the furthest coil to: "
-                 << "100%" << endl;
+            // cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
+            //      << " to 100%" << endl;
+
+            cout << "Intensify the furthest coil (" << farposx << ", " << farposy << ")"
+                 << "to: "
+                 << setprecision(2) << farcoilmag << "%" << endl;
             cout << "Intensify the closest coil at position "
                  << "(" << currentposx << ", " << currentposy << ")"
                  << " to: " << setprecision(2) << closecoilmag << " %" << endl;
