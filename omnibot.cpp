@@ -24,7 +24,7 @@ using namespace std;
 int main(){
 
 
-    magOutput(2);
+    magOutput();
 
     return 0;
 }
