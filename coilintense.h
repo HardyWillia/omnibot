@@ -102,7 +102,7 @@ double magOutput(int n)
 
                     cout << "Your current position: (" << currentposx << ", " << currentposy << ")" << endl;
 
-                    if (currentposx >= 6 || currentposy > 5)
+                    if (currentposx >= 6)
                     {
                         currentposx = 1;
 
@@ -205,7 +205,7 @@ double magOutput(int n)
 
                     cout << "Your current position: (" << currentposx << ", " << currentposy << ")" << endl;
 
-                    if (currentposx >= 6 || currentposy > 5)
+                    if (currentposx >= 6)
                     {
                         currentposx = 1;
 
