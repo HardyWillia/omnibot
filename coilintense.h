@@ -145,7 +145,7 @@ double magOutput(int n)
                     cin >> intendedmag;
 
                     farcoilforce *= intendedmag/vecmag;
-                    farcoil = abs(farcoilforce) * 100;
+                    farcoilmag = abs(farcoilforce) * 100;
 
                     closecoilforce *= intendedmag / vecmag;
                     closecoilmag = abs(closecoilforce) * 100;
@@ -250,7 +250,7 @@ double magOutput(int n)
                     cin >> intendedmag;
 
                     farcoilforce *= intendedmag / vecmag;
-                    farcoil = abs(farcoilforce) * 100;
+                    farcoilmag = abs(farcoilforce) * 100;
 
                     closecoilforce *= intendedmag / vecmag;
                     closecoilmag = abs(closecoilforce) * 100;
