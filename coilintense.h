@@ -171,7 +171,7 @@ double magOutput()
 
                 ++num;
             }
-            
+
             else
             {
                 //Conditons for Mapping 1 (grid)
@@ -200,6 +200,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                     currentposition(x, y);
                 }
+                ++num;
             }
         }
         datafile.close();
