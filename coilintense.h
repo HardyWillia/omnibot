@@ -42,8 +42,6 @@ double mapping[2];
 double mapping2[2] = {x, y};
 double mapping1[2] = {x, y};
 
-int currentposx;
-int currentposy;
 
 //Intensify the furthest coil to 100%
 //Calculate the force of the closest coil
@@ -54,7 +52,7 @@ int currentposy;
 
 
 // Points in the cartesian plane
-void currentposition(double x, double y){
+void currentposition(int currentposx, int currentposy){
 
     int n = 2;
 
@@ -145,8 +143,6 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                currentposx = x;
-                currentposy = y;
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -170,7 +166,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
-                currentposition(currentposx, currentposy);
+                currentposition(x, y);
             }
 
             else
@@ -178,8 +174,6 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
-                currentposx = x;
-                currentposy = y;
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
@@ -201,7 +195,7 @@ double magOutput()
                     angle = abs(result);
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
-                currentposition(currentposx, currentposy);
+                currentposition(x, y);
             }
             ++num;
         }
