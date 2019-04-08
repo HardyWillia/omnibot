@@ -141,7 +141,6 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-                cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -165,6 +164,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
+                cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
                 currentposition(x, y);
             }
 
@@ -173,7 +173,6 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
-                cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
@@ -196,6 +195,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
             }
+            cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
             currentposition(x, y);
             ++num;
         }
