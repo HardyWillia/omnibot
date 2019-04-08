@@ -64,6 +64,8 @@ double magOutput(int n)
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+                int currentposx = int(x);
+                int currentposy = int(y);
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -90,9 +92,6 @@ double magOutput(int n)
                 ++num;
 
                 //Sort through the coordinates to find the closest to a given point
-                int currentposx = int (x);
-                int currentposy = int (y);
-
                 for (int i = 1; i < n; ++i)
                 {
 
@@ -169,6 +168,8 @@ double magOutput(int n)
                 {
                     x *= -1;
                     y *= -1;
+                    int currentposx = int(x);
+                    int currentposy = int(y);
                     result = atan2(y, x);
                     angle = result * 180 / PI;
                     if (angle < 0)
@@ -185,9 +186,6 @@ double magOutput(int n)
                 }
 
                 //Sort through the coordinates to find the closest to a given point
-                int currentposx = int (x);
-                int currentposy = int (y);
-
                 for (int i = 1; i < n; ++i)
                 {
 
