@@ -94,8 +94,8 @@ double magOutput(int n)
                 //Sort through the coordinates to find the closest to a given point
                 int currentposx = int (x);
                 int currentposy = int (y);
-                int farposx;
-                int farposy;
+                int farposx = abs(6 - currentposx);
+                int farposy = abs(5 - currentposy);
 
                 for (int i = 1; i < n; ++i)
                 {
@@ -123,8 +123,6 @@ double magOutput(int n)
                     else
                     {
                         currentposx += 1;
-                        int farposx = abs(6 - currentposx);
-                        int farposy = abs(5 - currentposy);
                     }
 
                     farcoil = sin(theta[num]) * 30;
@@ -199,8 +197,8 @@ double magOutput(int n)
                 //Sort through the coordinates to find the closest to a given point
                 int currentposx = int (x);
                 int currentposy = int (y);
-                int farposx;
-                int farposy;
+                int farposx = abs(6 - currentposx);
+                int farposy = abs(5 - currentposy);
 
                 for (int i = 1; i < n; ++i)
                 {
@@ -228,8 +226,6 @@ double magOutput(int n)
                     else
                     {
                         currentposx += 1;
-                        int farposx = abs(6 - currentposx);
-                        int farposy = abs(5 - currentposy);
                     }
 
                     farcoil = sin(theta[num]) * 30;
