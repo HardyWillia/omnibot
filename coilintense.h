@@ -111,13 +111,13 @@ void currentposition(int currentposx, int currentposy){
         //  }
         else if (closecoilmag == 0.0)
         {
-            printf("ONLY intensify the furthest coil at position (%lf, %lf) to: %0.2lfc\n", farposx, farposy, 100);
+            printf("ONLY intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100.0);
             //farcoilmag == 100.0;
         }
         else
         {
 
-            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100);
+            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100.0);
 
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
@@ -146,68 +146,69 @@ double magOutput()
                exit(EXIT_FAILURE);
         
     }
-     while (fgets(line, sizeof(line), &fp)){
-        
-            fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
+    while (*fgets(line, sizeof(line), fp))
+    {
 
-            //Conditions for Mapping 2 (Bullseye)
-            if (theta[num] < PI / 4)
+        fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
+
+        //Conditions for Mapping 2 (Bullseye)
+        if (theta[num] < PI / 4)
+        {
+            x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
+            y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+
+            mapping[2] = mapping2[2];
+            printf("\nMapping 2 has been chosen\n");
+
+            if (x < 0)
             {
-                x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
-                y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
-
-                mapping[2] = mapping2[2];
-                printf("\nMapping 2 has been chosen\n");
-
-                if (x < 0)
+                x *= -1;
+                y *= -1;
+                result = atan2(y, x);
+                angle = result * 180 / PI;
+                if (angle < 0)
                 {
-                    x *= -1;
-                    y *= -1;
-                    result = atan2(y, x);
-                    angle = result * 180 / PI;
-                    if (angle < 0)
-                    {
-                        angle = angle + 180;
-                    }
-                    printf("The angle is: %0.2lf\n", angle);
+                    angle = angle + 180;
                 }
-                else
-                {
-                    result = atan2(y, x) * 180 / PI;
-                    angle = abs(result);
-                    printf("The angle is: %0.2lf\n", angle);
-                }
+                printf("The angle is: %0.2lf\n", angle);
             }
-
             else
             {
-                //Conditons for Mapping 1 (grid)
-                x = theta[num];
-                y = phi[num];
-                mapping[2] = mapping1[2];
-                printf ( "\nMapping 1 has been chosen\n");
-                if (x < 0)
-                {
-                    x *= -1;
-                    y *= -1;
-                    result = atan2(y, x);
-                    angle = result * 180 / PI;
-                    if (angle < 0)
-                    {
-                        angle = angle + 180;
-                    }
-                    printf("The angle is: %0.2lf\n", angle);
-                }
-                else
-                {
-                    result = atan2(y, x) * 180 / PI;
-                    angle = abs(result);
-                    printf ( "The angle is: %0.2lf\n", angle);
-                }
+                result = atan2(y, x) * 180 / PI;
+                angle = abs(result);
+                printf("The angle is: %0.2lf\n", angle);
             }
-            printf ("Your current position: (%lf , %lf) \n", x,  y);
-            currentposition(x, y);
-            ++num;
+        }
+
+        else
+        {
+            //Conditons for Mapping 1 (grid)
+            x = theta[num];
+            y = phi[num];
+            mapping[2] = mapping1[2];
+            printf("\nMapping 1 has been chosen\n");
+            if (x < 0)
+            {
+                x *= -1;
+                y *= -1;
+                result = atan2(y, x);
+                angle = result * 180 / PI;
+                if (angle < 0)
+                {
+                    angle = angle + 180;
+                }
+                printf("The angle is: %0.2lf\n", angle);
+            }
+            else
+            {
+                result = atan2(y, x) * 180 / PI;
+                angle = abs(result);
+                printf("The angle is: %0.2lf\n", angle);
+            }
+        }
+        printf("Your current position: (%lf , %lf) \n", x, y);
+        currentposition(x, y);
+        ++num;
         }
     fclose(fp);
 
