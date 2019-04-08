@@ -42,6 +42,9 @@ double mapping[2];
 double mapping2[2] = {x, y};
 double mapping1[2] = {x, y};
 
+int currentposx;
+int currentposy;
+
 //Intensify the furthest coil to 100%
 //Calculate the force of the closest coil
 //Calculate the current vector magnitude
@@ -53,8 +56,6 @@ double mapping1[2] = {x, y};
 // Points in the cartesian plane
 void currentposition(double x, double y){
 
-    int currentposx = int(x);
-    int currentposy = int(y);
     int n = 2;
 
     //Sort through the coordinates to find the closest to a given point
@@ -144,6 +145,8 @@ double magOutput()
             {
                 x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+                currentposx = int(x);
+                currentposy = int(y);
 
                 mapping[2] = mapping2[2];
                 cout << endl
@@ -167,7 +170,7 @@ double magOutput()
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
-                currentposition(x, y);
+                currentposition(currentposx, currentposy);
             }
 
             else
@@ -175,6 +178,8 @@ double magOutput()
                 //Conditons for Mapping 1 (grid)
                 x = theta[num];
                 y = phi[num];
+                currentposx = int(x);
+                currentposy = int(y);
                 mapping[2] = mapping1[2];
                 cout << endl
                      << "Mapping 1 has been chosen" << endl;
@@ -196,7 +201,7 @@ double magOutput()
                     angle = abs(result);
                     cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
-                currentposition(x, y);
+                currentposition(currentposx, currentposy);
             }
             ++num;
         }
