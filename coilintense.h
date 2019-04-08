@@ -109,11 +109,11 @@ void currentposition(int currentposx, int currentposy){
         //  {
         //         printf ( "The vector cannot be re-created\n");
         //  }
-        else if (closecoilmag == 0.0)
-        {
-            printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
-            //farcoilmag == 100.0;
-        }
+        // else if (closecoilmag == 0.0)
+        // {
+        //     printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+        //     //farcoilmag == 100.0;
+        // }
         else
         {
 
