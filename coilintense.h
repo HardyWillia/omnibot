@@ -79,8 +79,6 @@ void currentposition(int currentposx, int currentposy){
         farcoilforce = sin(theta[num]) * 30;
         closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
 
-        printf("%lf\n", closecoilforce);
-
 
         /*
                     Max current 30A
@@ -91,7 +89,7 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-        vecmag = cos(abs(theta[num])) * 100.0 + cos(abs(phi[num])) * abs(closecoilforce);
+        vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
         int intendedmag;
         printf ("What is the intended vector magnitude: ");
@@ -102,6 +100,7 @@ void currentposition(int currentposx, int currentposy){
 
         closecoilforce *= intendedmag / vecmag;
         closecoilmag = abs(closecoilforce) * 100;
+        printf("%lf\n", closecoilmag);
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
         {
