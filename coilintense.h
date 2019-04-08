@@ -92,7 +92,7 @@ void currentposition(int currentposx, int currentposy){
 
         int intendedmag;
         printf ("What is the intended vector magnitude: \n");
-        scanf("%d", intendedmag);
+        scanf("%d", &intendedmag);
 
         //farcoilforce *= intendedmag/vecmag;
         //farcoilmag = abs(farcoilforce) * 100;
@@ -117,12 +117,12 @@ void currentposition(int currentposx, int currentposy){
         else
         {
 
-            printf("Intensify the furthest coil at position (%lf, %lf) to: %0.2lfc\n", farposx, farposy, 100);
+            printf("Intensify the furthest coil at position (%d, %d) to: %0.2lfc\n", farposx, farposy, 100);
 
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
             //       setprecision(2)  farcoilmag  "%"  "\n";
-            printf ( "Intensify the closest coil at position (%lf, %lf) to: %0.2lfc\n", currentposx, currentposy, closecoilmag);
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.2lfc\n", currentposx, currentposy, closecoilmag);
 
         }
     }
@@ -146,9 +146,9 @@ double magOutput()
                exit(EXIT_FAILURE);
         
     }
-     while (fgets(line, sizeof(line), fp)){
+     while (fgets(line, sizeof(line), &fp)){
         
-            fscanf(fp, "%f %f", &theta[num], &phi[num]);
+            fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
 
             //Conditions for Mapping 2 (Bullseye)
             if (theta[num] < PI / 4)
