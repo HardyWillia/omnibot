@@ -91,7 +91,7 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-        vecmag = cos(abs(theta[num])) * 100.0 + cos(abs(phi[num])) * (closecoilforce);
+        vecmag = cos(abs(theta[num])) * 100.0 + cos(abs(phi[num])) * abs(closecoilforce);
 
         int intendedmag;
         printf ("What is the intended vector magnitude: ");
@@ -125,7 +125,7 @@ void currentposition(int currentposx, int currentposy){
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
             //       setprecision(2)  farcoilmag  "%"  "\n";
-            printf ( "Intensify the closest coil at position (%d, %d) to: %0.2lf\n", currentposx, currentposy, closecoilmag);
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
 
         }
     }
