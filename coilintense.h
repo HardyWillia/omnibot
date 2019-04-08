@@ -55,7 +55,7 @@ void currentposition(double x, double y){
 
     int currentposx = int(x);
     int currentposy = int(y);
-    int n;
+    int n = 2;
 
     //Sort through the coordinates to find the closest to a given point
     for (int i = 1; i < n; ++i)
