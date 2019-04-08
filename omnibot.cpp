@@ -24,7 +24,10 @@ using namespace std;
 int main(){
 
 
+    std::clock_t start = std::clock();
     magOutput();
+    double duration = (std::clock() - start);
+    cout << endl << "This program took: " << duration << "ms" << endl;
 
     return 0;
 }
