@@ -9,19 +9,17 @@
     -Willia 04/01/19: Added coilintensetest as a test program for further improvements
     -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
     -Willia 04/08/19: Added more conditions based on coil positions
-
 */
 
-#include <iostream>
-#include <string>
+#include <string.h>
+#include <stdio.h>
+//#include <iostream>
 #include <math.h>
-#include <fstream>
-#include <algorithm>
-#include <string>
+//#include <fstream>
+//#include <algorithm>
 #include <stdlib.h>
-#include <iomanip>
+//#include <iomanip>
 
-using namespace std;
 #define PI 3.14159265
 
 //Global variables
@@ -48,15 +46,15 @@ double angle, result, x, y;
 //Output the magnitudes (determines coil intensity for switching)
 
 
-// Points in the cartesian plane
+// Points in the Cartesian plane
 void currentposition(int currentposx, int currentposy){
 
     int n = 2;
     int farposx = abs(6 - currentposx);
     int farposy = abs(5 - currentposy);
-
+    int i;
     //Sort through the coordinates to find the closest to a given point
-    for (int i = 1; i < n; ++i)
+    for (i = 1; i < n; ++i)
     {
 
         if (currentposx >= 6)
@@ -93,11 +91,12 @@ void currentposition(int currentposx, int currentposy){
                     100% = 304W
                     50% = 152W
                 */
-        vecmag = cos(abs(theta[num])) * max(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
-        int intendedmag;
-        cout << "What is the intended vector magnitude: ";
-        cin >> intendedmag;
+        vecmag = cos(theta[num] * -1) * 100.0 + cos(abs(phi[num])) * (closecoilforce);
+
+        int intendedmag = 56;
+        //cout << "What is the intended vector magnitude: ";
+        //cin >> intendedmag;
 
         //farcoilforce *= intendedmag/vecmag;
         //farcoilmag = abs(farcoilforce) * 100;
@@ -107,7 +106,8 @@ void currentposition(int currentposx, int currentposy){
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
         {
-                cout << "The vector cannot be re-created" << endl;
+                //cout << "The vector cannot be re-created" << endl;
+            break;
         }
         // if (farcoilmag != farcoilmag || farcoilmag > 100.0)
         // {
@@ -115,20 +115,21 @@ void currentposition(int currentposx, int currentposy){
         // }
         else if (closecoilmag == 0.0)
         {
-            cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << " to 100%" << endl;
+            //cout << "Only intensify the furthest coil (" << farposx << ", " << farposy << ")" << " to 100%" << endl;
+            farcoilmag == 100.0;
         }
         else
         {
-
-            cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
-                 << " to 100%" << endl;
+               
+//            cout << "Intensify the furthest coil to: (" << farposx << ", " << farposy << ")"
+//                 << " to 100%" << endl;
 
             // cout << "Intensify the furthest coil (" << farposx << ", " << farposy << ")"
             //      << " to: "
             //      << setprecision(2) << farcoilmag << "%" << endl;
-            cout << "Intensify the closest coil at position "
-                 << "(" << currentposx << ", " << currentposy << ")"
-                 << " to: " << setprecision(2) << closecoilmag << " %" << endl;
+//            cout << "Intensify the closest coil at position "
+//                 << "(" << currentposx << ", " << currentposy << ")"
+//                 << " to: " << setprecision(2) << closecoilmag << " %" << endl;
         }
     }
 }
@@ -140,14 +141,20 @@ double magOutput()
     double mapping[2];
     double mapping2[2] = {x, y};
     double mapping1[2] = {x, y};
-    string line;
-    ifstream datafile("data.txt");
+    char line;
+    FILE *fp;
+    char datafile[] = "data.txt";
 
-    if (datafile.is_open())
+    fp = fopen(datafile, "r");
+    if (fp != NULL)
     {
-        while (getline(datafile, line))
-        {
-            datafile >> theta[num] >> phi[num];
+               perror("Error while opening the file.\n");
+               exit(EXIT_FAILURE);
+        
+    }
+     while (fgets(line, sizeof(line), fp)){
+        
+            fscanf(fp, "%f %f", &theta[num], &phi[num]);
 
             //Conditions for Mapping 2 (Bullseye)
             if (theta[num] < PI / 4)
@@ -156,8 +163,8 @@ double magOutput()
                 y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
 
                 mapping[2] = mapping2[2];
-                cout << endl
-                     << "Mapping 2 has been chosen." << endl;
+//                cout << endl
+//                     << "Mapping 2 has been chosen." << endl;
                 if (x < 0)
                 {
                     x *= -1;
@@ -168,13 +175,13 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << setprecision(3) << angle << endl;
+//                    cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                    //cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
 
             }
@@ -185,8 +192,8 @@ double magOutput()
                 x = theta[num];
                 y = phi[num];
                 mapping[2] = mapping1[2];
-                cout << endl
-                     << "Mapping 1 has been chosen" << endl;
+//                cout << endl
+//                     << "Mapping 1 has been chosen" << endl;
                 if (x < 0)
                 {
                     x *= -1;
@@ -197,22 +204,20 @@ double magOutput()
                     {
                         angle = angle + 180;
                     }
-                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                    //cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
                 else
                 {
                     result = atan2(y, x) * 180 / PI;
                     angle = abs(result);
-                    cout << "The angle is: " << setprecision(3) << angle << endl;
+                    //cout << "The angle is: " << setprecision(3) << angle << endl;
                 }
             }
-            cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
+            //cout << "Your current position: (" << int(x) << ", " << int(y) << ")" << endl;
             currentposition(x, y);
             ++num;
         }
-        datafile.close();
-    }
-    else
-        cout << "Unable to open file";
+    fclose(fp);
+
 }
 #endif /* COILINTENSE_H */
