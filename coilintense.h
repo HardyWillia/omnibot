@@ -207,10 +207,9 @@ double magOutput()
                 printf("The angle is: %0.0lf\n", angle);
             }
         }
-        int a = x;
-        int b = y;
-        printf("Your current position: (%d , %d) \n", a, b);
-        currentposition(a, b);
+
+        printf("Your current position: (%d , %d) \n", x, y);
+        currentposition(x, y);
         ++num;
         }
     fclose(fp);
