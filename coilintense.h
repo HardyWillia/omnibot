@@ -43,7 +43,7 @@ double angle, result, x, y;
 
 
 // Points in the Cartesian plane
-void currentposition(int currentposx, int currentposy, double theta[], double phi[]){
+void currentposition(int currentposx, int currentposy, double x, double y){
 
     int n = 2;
     int farposx = abs(6 - currentposx);
@@ -76,8 +76,8 @@ void currentposition(int currentposx, int currentposy, double theta[], double ph
             currentposx += 1;
         }
 
-        farcoilforce = sin(theta[num]) * 30;
-        closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+        farcoilforce = sin(x) * 30;
+        closecoilforce = (sin(abs(x) * 30)) / (sin(abs(y)));
 
         /*
                     Max current 30A
@@ -88,7 +88,7 @@ void currentposition(int currentposx, int currentposy, double theta[], double ph
                     50% = 152W
                 */
 
-        vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+        vecmag = cos(abs(x)) * fmax(farcoilforce, 100.0) + cos(abs(y)) * (closecoilforce);
         
 
         int intendedmag;
@@ -211,7 +211,7 @@ double magOutput()
         int a = x;
         int b = y;
         printf("Your current position: (%d , %d) \n", a, b);
-        currentposition(a, b, &theta[num], &phi[num]);
+        currentposition(a, b, x, y);
         ++num;
         }
     fclose(fp);
