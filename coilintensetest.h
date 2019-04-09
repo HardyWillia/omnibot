@@ -82,6 +82,7 @@ void currentposition(int currentposx, int currentposy)
 
         farcoilforce = sin(theta[num]) * 30;
         closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+        cout << "Close coil force 1: " << closecoilforce << endl;
 
         /*
                     Max current 30A

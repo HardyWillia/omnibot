@@ -78,8 +78,9 @@ void currentposition(int currentposx, int currentposy){
 
         farcoilforce = sin(theta[num]) * 30;
         closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+        printf("Close coil force 1: %lf", closecoilforce);
 
-        /*
+            /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -88,7 +89,7 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-        vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+            vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
         printf("Vec mag: %lf\n", vecmag);
 
         int intendedmag;
