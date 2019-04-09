@@ -43,7 +43,7 @@ double angle, result, x, y;
 
 
 // Points in the Cartesian plane
-int currentposition(int currentposx, int currentposy){
+void currentposition(int currentposx, int currentposy){
 
     int n = 2;
     int i;
@@ -75,7 +75,6 @@ int currentposition(int currentposx, int currentposy){
         }
     }
 
-    return currentposx, currentposy;
 }
 
 //Output the magnitude
