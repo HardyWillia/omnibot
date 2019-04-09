@@ -17,9 +17,8 @@
 
 int main(){
 
-    while(1){
     magOutput();
-    }
+    
    
 
     return 0;

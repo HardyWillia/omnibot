@@ -46,6 +46,8 @@ double angle, result, x, y;
 void currentposition(int currentposx, int currentposy){
 
     int n = 2;
+    int farposx = abs(6 - currentposx);
+    int farposy = abs(5 - currentposy);
     int i;
     //Sort through the coordinates to find the closest to a given point
     for (i = 1; i < n; ++i)
@@ -73,8 +75,62 @@ void currentposition(int currentposx, int currentposy){
         {
             currentposx += 1;
         }
-    }
 
+        farcoilforce = sin(theta[num]) * 30;
+        closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+        printf("%lf\n", closecoilforce);
+
+        /*
+                    Max current 30A
+                    Max voltage 10.4V 
+                    Max wattage 304W
+                    **Will need at minimum 25% (76W) of intensity to power on a coil
+                    100% = 304W
+                    50% = 152W
+                */
+
+        vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+        
+
+        int intendedmag;
+        printf ("What is the intended vector magnitude: ");
+        scanf("%d", &intendedmag);
+
+        //farcoilforce *= intendedmag/vecmag;
+        //farcoilmag = abs(farcoilforce) * 100;
+        double test = intendedmag / vecmag;
+        printf("%lf\n", test);
+        closecoilforce *= intendedmag / vecmag;
+
+        closecoilmag = abs(closecoilforce) * 100;
+        
+
+        if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+        {
+            printf("The vector cannot be re-created\n");
+            break;
+        }
+        //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+        //  {
+        //         printf ( "The vector cannot be re-created\n");
+        //  }
+        else if (closecoilmag == 0.0)
+        {
+            printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+            //farcoilmag == 100.0;
+        }
+        else
+        {
+
+            printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+
+            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
+            //       " to: "
+            //       setprecision(2)  farcoilmag  "%"  "\n";
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
+
+        }
+    }
 }
 
 //Output the magnitude
@@ -157,16 +213,43 @@ double magOutput()
         }
         int currentposx = x;
         int currentposy = y;
+        printf("Your current position: (%d , %d) \n", currentposx, currentposy);
+        int n = 2;
         int farposx = abs(6 - currentposx);
         int farposy = abs(5 - currentposy);
-        printf("Your current position: (%d , %d) \n", currentposx, currentposy);
-        currentposition(currentposx, currentposy);
+        int i;
+        //Sort through the coordinates to find the closest to a given point
+        for (i = 1; i < n; ++i)
+        {
 
-        farcoilforce = sin(theta[num]) * 30;
-        closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
-        printf("%lf\n", closecoilforce);
+            if (currentposx >= 6)
+            {
+                currentposx = 1;
 
-        /*
+                if (angle >= 0.0 && angle < 40.0)
+                {
+                    currentposx += 1;
+                }
+                else if (angle > 40.0 && angle <= 90.0)
+                {
+                    currentposy += 1;
+                }
+                else if (angle > 90 && angle <= 180)
+                {
+                    currentposx = abs(7 - currentposx);
+                    currentposy += 2;
+                }
+            }
+            else
+            {
+                currentposx += 1;
+            }
+
+            farcoilforce = sin(theta[num]) * 30;
+            closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+            printf("%lf\n", closecoilforce);
+
+            /*
                     Max current 30A
                     Max voltage 10.4V 
                     Max wattage 304W
@@ -175,43 +258,44 @@ double magOutput()
                     50% = 152W
                 */
 
-        vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+            vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
 
-        int intendedmag;
-        printf("What is the intended vector magnitude: ");
-        scanf("%d", &intendedmag);
+            int intendedmag;
+            printf("What is the intended vector magnitude: ");
+            scanf("%d", &intendedmag);
 
-        //farcoilforce *= intendedmag/vecmag;
-        //farcoilmag = abs(farcoilforce) * 100;
-        double test = intendedmag / vecmag;
-        printf("%lf\n", test);
-        closecoilforce *= intendedmag / vecmag;
+            //farcoilforce *= intendedmag/vecmag;
+            //farcoilmag = abs(farcoilforce) * 100;
+            double test = intendedmag / vecmag;
+            printf("%lf\n", test);
+            closecoilforce *= intendedmag / vecmag;
 
-        closecoilmag = abs(closecoilforce) * 100;
+            closecoilmag = abs(closecoilforce) * 100;
 
-        if (closecoilmag != closecoilmag || closecoilmag > 100.0)
-        {
-            printf("The vector cannot be re-created\n");
-            break;
-        }
-        //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
-        //  {
-        //         printf ( "The vector cannot be re-created\n");
-        //  }
-        else if (closecoilmag == 0.0)
-        {
-            printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
-            //farcoilmag == 100.0;
-        }
-        else
-        {
+            if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+            {
+                printf("The vector cannot be re-created\n");
+                break;
+            }
+            //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+            //  {
+            //         printf ( "The vector cannot be re-created\n");
+            //  }
+            else if (closecoilmag == 0.0)
+            {
+                printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+                //farcoilmag == 100.0;
+            }
+            else
+            {
 
-            printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+                printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
 
-            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
-            //       " to: "
-            //       setprecision(2)  farcoilmag  "%"  "\n";
-            printf("Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
+                // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
+                //       " to: "
+                //       setprecision(2)  farcoilmag  "%"  "\n";
+                printf("Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
+            }
         }
         ++num;
         }
