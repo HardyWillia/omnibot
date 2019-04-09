@@ -78,7 +78,7 @@ void currentposition(int currentposx, int currentposy){
 
         double val = 30.0;
         farcoilforce = sin(theta[num]) * val;
-        closecoilforce = ((sin(theta[num]) * val) * -1) / ((sin(phi[num])) * -1);
+        closecoilforce = (sin(theta[num]) * val * -1.0) / (sin(phi[num]) * -1.0);
         printf("Close coil force 1: %lf", closecoilforce);
 
             /*
