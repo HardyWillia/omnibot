@@ -101,6 +101,7 @@ void currentposition(int currentposx, int currentposy)
         //farcoilmag = abs(farcoilforce) * 100;
 
         closecoilforce *= intendedmag / vecmag;
+        cout << "Coil force: " << closecoilforce << endl;
         closecoilmag = abs(closecoilforce) * 100;
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)

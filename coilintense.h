@@ -98,6 +98,7 @@ void currentposition(int currentposx, int currentposy){
         //farcoilmag = abs(farcoilforce) * 100;
 
         closecoilforce *= intendedmag / vecmag;
+        printf("Coil force: %lf\n", closecoilforce);
         closecoilmag = abs(closecoilforce) * 100;
         
 
