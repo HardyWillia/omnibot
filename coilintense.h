@@ -93,7 +93,7 @@ void currentposition(int currentposx, int currentposy, double x, double y){
 
         int intendedmag;
         printf ("What is the intended vector magnitude: ");
-        scanf("%d", &intendedmag);
+        scanf("%d", intendedmag);
 
         //farcoilforce *= intendedmag/vecmag;
         //farcoilmag = abs(farcoilforce) * 100;
