@@ -76,8 +76,9 @@ void currentposition(int currentposx, int currentposy){
             currentposx += 1;
         }
 
-        farcoilforce = sin(theta[num]) * 30;
-        closecoilforce = (sin(abs(theta[num]) * 30)) / (sin(abs(phi[num])));
+        double val = 30.0;
+        farcoilforce = sin(theta[num]) * val;
+        closecoilforce = (sin(abs(theta[num]) * val)) / (sin(abs(phi[num])));
         printf("Close coil force 1: %lf", closecoilforce);
 
             /*
@@ -174,13 +175,13 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.0lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
                 result = atan2(y, x) * 180 / PI;
                 angle = abs(result);
-                printf("The angle is: %0.0lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
         }
 
@@ -201,7 +202,7 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.0lf\n", angle);
+                printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
