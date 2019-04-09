@@ -89,6 +89,7 @@ void currentposition(int currentposx, int currentposy){
                 */
 
         vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+        printf("Vec mag: %lf\n", vecmag);
 
         int intendedmag;
         printf ("What is the intended vector magnitude: ");

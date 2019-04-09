@@ -92,6 +92,7 @@ void currentposition(int currentposx, int currentposy)
                     50% = 152W
                 */
         vecmag = cos(abs(theta[num])) * max(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+        cout << "Vecmag: " << vecmag << endl;
 
         int intendedmag;
         cout << "What is the intended vector magnitude: ";
