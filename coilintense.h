@@ -208,7 +208,7 @@ double magOutput()
             }
         }
 
-        printf("Your current position: (%d , %d) \n", x, y);
+        printf("Your current position: (%lf , %lf) \n", x, y);
         currentposition(x, y);
         ++num;
         }
