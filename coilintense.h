@@ -78,7 +78,7 @@ void currentposition(int currentposx, int currentposy){
 
         double val = 30.0;
         farcoilforce = sin(theta[num]) * val;
-        closecoilforce = (sin(theta[num]) * val * -1.0) / (sin(phi[num]) * -1.0);
+        closecoilforce = (sin(fabs(theta[num]) * val)) / (sin(fabs(phi[num])));
         printf("Close coil force 1: %lf", closecoilforce);
 
             /*
@@ -90,7 +90,7 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-            vecmag = cos(abs(theta[num])) * fmax(farcoilforce, 100.0) + cos(abs(phi[num])) * (closecoilforce);
+            vecmag = cos(fabs(theta[num])) * fmax(farcoilforce, 100.0) + cos(fabs(phi[num])) * (closecoilforce);
         printf("Vec mag: %lf\n", vecmag);
 
         int intendedmag;
@@ -102,7 +102,7 @@ void currentposition(int currentposx, int currentposy){
 
         closecoilforce *= intendedmag / vecmag;
         printf("Coil force: %lf\n", closecoilforce);
-        closecoilmag = abs(closecoilforce) * 100;
+        closecoilmag = fabs(closecoilforce) * 100;
         
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
