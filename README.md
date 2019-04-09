@@ -16,3 +16,7 @@
 Run the program with 
 - g++ -std=c++11 -fmax-errors=7 omnibot.cpp -o omnibot 
 - ./omnibot
+
+If using C:
+-  g++ omnibot.c -o omnibot
+- ./omnibot
