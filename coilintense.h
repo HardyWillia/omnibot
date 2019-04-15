@@ -9,6 +9,7 @@
     -Willia 04/01/19: Added coilintensetest as a test program for further improvements
     -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
     -Willia 04/08/19: Added more conditions based on coil positions
+    -Willia 04/14/19: Removed while loop that called file to work better with control algorithm
 */
 
 #include <string.h>
@@ -19,8 +20,8 @@
 #define PI 3.14159265
 
 //Global variables
-double theta[100];
-double phi[100];
+double theta;
+double phi;
 double intendvec;
 double farcoilforce;
 double closecoilforce;
@@ -30,7 +31,6 @@ double closecoilmag;
 int intensity[2];
 int radius;
 
-int num = 0;
 double angle, result, x, y;
 
 
@@ -77,8 +77,8 @@ void currentposition(int currentposx, int currentposy){
         }
 
         double val = 30.0;
-        farcoilforce = sin(theta[num]) * val;
-        closecoilforce = (sin(fabs(theta[num]) * val)) / (sin(fabs(phi[num])));
+        farcoilforce = sin(theta) * val;
+        closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
         //printf("Close coil force 1: %lf", closecoilforce);
 
             /*
@@ -90,10 +90,11 @@ void currentposition(int currentposx, int currentposy){
                     50% = 152W
                 */
 
-            vecmag = cos(fabs(theta[num])) * fmax(farcoilforce, 100.0) + cos(fabs(phi[num])) * (closecoilforce);
+            vecmag = cos(fabs(theta)) * farcoilforce + cos(fabs(phi)) * (closecoilforce);
         //printf("Vec mag: %lf\n", vecmag);
 
-        int intendedmag = sqrt(pow(theta[num],2) + pow(phi[num],2));
+            double intendedmag = sqrt(pow(theta,2) + pow(phi,2));
+        //int intendedmag;
         //printf ("What is the intended vector magnitude: ");
         //scanf("%d", &intendedmag);
 
@@ -107,8 +108,9 @@ void currentposition(int currentposx, int currentposy){
 
         if (closecoilmag != closecoilmag || closecoilmag > 100.0)
         {
-            printf("The vector cannot be re-created\n");
-            break;
+            //printf("The vector cannot be re-created\n");
+            //break;
+            closecoilmag = 100.0;
         }
         //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
         //  {
@@ -116,54 +118,40 @@ void currentposition(int currentposx, int currentposy){
         //  }
         else if (closecoilmag == 0.0)
         {
-            printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
-            //farcoilmag == 100.0;
+            //printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+            farcoilmag = 100.0;
         }
         else
         {
 
-            printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+         //   printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
 
             // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
             //       " to: "
             //       setprecision(2)  farcoilmag  "%"  "\n";
-            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
-
+           // printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
+            farcoilmag = 100.0;
+            closecoilmag = closecoilmag;
         }
     }
 }
 
 //Output the magnitude
-double magOutput()
+double magOutput(double theta, double phi)
 {
 
     double mapping[2];
     double mapping2[2] = {x, y};
     double mapping1[2] = {x, y};
-    char *line;
-    FILE *fp;
-    char datafile[] = "data.txt";
-
-    fp = fopen(datafile, "r");
-    if (fp == NULL)
-    {
-               perror("Error while opening the file.\n");
-               exit(EXIT_FAILURE);
-        
-    }
-    while (fgets(line, sizeof(line), fp))
-    {
-
-        fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
 
         //Conditions for Mapping 2 (Bullseye)
-        if (theta[num] < PI / 4)
+        if (theta < PI / 4)
         {
-            x = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * cos(phi[num]);
-            y = sqrt(pow(radius, 2) - pow(cos(theta[num]), 2) * pow(radius, 2)) * sin(phi[num]);
+            x = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * cos(phi);
+            y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
 
             mapping[2] = mapping2[2];
-            printf("\nMapping 2 has been chosen\n");
+          //  printf("\nMapping 2 has been chosen\n");
 
             if (x < 0)
             {
@@ -175,23 +163,23 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.1lf\n", angle);
+              //  printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
                 result = atan2(y, x) * 180 / PI;
-                angle = abs(result);
-                printf("The angle is: %0.1lf\n", angle);
+                angle = fabs(result);
+              //  printf("The angle is: %0.1lf\n", angle);
             }
         }
 
         else
         {
             //Conditons for Mapping 1 (grid)
-            x = theta[num];
-            y = phi[num];
+            x = theta;
+            y = phi;
             mapping[2] = mapping1[2];
-            printf("\nMapping 1 has been chosen\n");
+           // printf("\nMapping 1 has been chosen\n");
             if (x < 0)
             {
                 x *= -1;
@@ -202,22 +190,19 @@ double magOutput()
                 {
                     angle = angle + 180;
                 }
-                printf("The angle is: %0.1lf\n", angle);
+               // printf("The angle is: %0.1lf\n", angle);
             }
             else
             {
                 result = atan2(y, x) * 180 / PI;
-                angle = abs(result);
-                printf("The angle is: %0.0lf\n", angle);
+                angle = fabs(result);
+                //printf("The angle is: %0.0lf\n", angle);
             }
         }
         int a = x;
         int b = y;
-        printf("Your current position: (%d , %d) \n", a, b);
+       // printf("Your current position: (%d , %d) \n", a, b);
         currentposition(a, b);
-        ++num;
-        }
-    fclose(fp);
-
+      
 }
 #endif /* COILINTENSE_H */
