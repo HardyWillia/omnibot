@@ -17,9 +17,36 @@
 
 int main(){
 
+    //used if a file was present
     magOutput();
     
-   
+  //magoutput with read in from control algorithm, this can be called with all cases from control system
+  //magOutput(theta, phi);
+  
+  /* Or if the control algorithm was able to output to a file
+  
+    int num = 0;
+    char *line;
+    FILE *fp;
+    char datafile[] = "data.txt";
 
+    fp = fopen(datafile, "r");
+    if (fp == NULL)
+    {
+               perror("Error while opening the file.\n");
+               exit(EXIT_FAILURE);
+        
+    }
+    while (fgets(line, sizeof(line), fp))
+    {
+
+        fscanf(fp, "%lf %lf", &theta[num], &phi[num]);
+            magOutput(theta[num], phi[num]);
+            num++; 
+    }
+
+    fclose(fp);
+
+*/
     return 0;
 }
