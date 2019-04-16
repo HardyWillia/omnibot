@@ -10,6 +10,7 @@
     -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
     -Willia 04/08/19: Added more conditions based on coil positions
     -Willia 04/14/19: Removed while loop that called file to work better with control algorithm
+    -Willia 04/15/19: Reduced timing of program to 16.62 milliseconds
 */
 
 #include <string.h>
@@ -33,7 +34,6 @@ int radius;
 
 double angle, result, x, y;
 
-
 //Intensify the furthest coil to 100%
 //Calculate the force of the closest coil
 //Calculate the current vector magnitude
@@ -41,13 +41,11 @@ double angle, result, x, y;
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
 
-
 // Points in the Cartesian plane
-void currentposition(int currentposx, int currentposy){
+void currentposition(int currentposx, int currentposy)
+{
 
     int n = 2;
-    int farposx = abs(6 - currentposx);
-    int farposy = abs(5 - currentposy);
     int i;
     //Sort through the coordinates to find the closest to a given point
     for (i = 1; i < n; ++i)
@@ -75,64 +73,6 @@ void currentposition(int currentposx, int currentposy){
         {
             currentposx += 1;
         }
-
-        double val = 30.0;
-        farcoilforce = sin(theta) * val;
-        closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
-        //printf("Close coil force 1: %lf", closecoilforce);
-
-            /*
-                    Max current 30A
-                    Max voltage 10.4V 
-                    Max wattage 304W
-                    **Will need at minimum 25% (76W) of intensity to power on a coil
-                    100% = 304W
-                    50% = 152W
-                */
-
-            vecmag = cos(fabs(theta)) * farcoilforce + cos(fabs(phi)) * (closecoilforce);
-        //printf("Vec mag: %lf\n", vecmag);
-
-            double intendedmag = sqrt(pow(theta,2) + pow(phi,2));
-        //int intendedmag;
-        //printf ("What is the intended vector magnitude: ");
-        //scanf("%d", &intendedmag);
-
-        //farcoilforce *= intendedmag/vecmag;
-        //farcoilmag = abs(farcoilforce) * 100;
-
-        closecoilforce *= intendedmag / vecmag;
-        //printf("Coil force: %lf\n", closecoilforce);
-        closecoilmag = fabs(closecoilforce) * 100;
-        
-
-        if (closecoilmag != closecoilmag || closecoilmag > 100.0)
-        {
-            //printf("The vector cannot be re-created\n");
-            //break;
-            closecoilmag = 100.0;
-        }
-        //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
-        //  {
-        //         printf ( "The vector cannot be re-created\n");
-        //  }
-        else if (closecoilmag == 0.0)
-        {
-            //printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
-            farcoilmag = 100.0;
-        }
-        else
-        {
-
-         //   printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
-
-            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
-            //       " to: "
-            //       setprecision(2)  farcoilmag  "%"  "\n";
-           // printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
-            farcoilmag = 100.0;
-            closecoilmag = closecoilmag;
-        }
     }
 }
 
@@ -144,65 +84,153 @@ double magOutput(double theta, double phi)
     double mapping2[2] = {x, y};
     double mapping1[2] = {x, y};
 
-        //Conditions for Mapping 2 (Bullseye)
-        if (theta < PI / 4)
+    //Conditions for Mapping 2 (Bullseye)
+    if (theta < PI / 4)
+    {
+        x = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * cos(phi);
+        y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
+
+        mapping[2] = mapping2[2];
+        /*printf("\nMapping 2 has been chosen\n");
+ms_delay(5000);
+   printf( "\f" );*/
+        if (x < 0)
         {
-            x = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * cos(phi);
-            y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
-
-            mapping[2] = mapping2[2];
-          //  printf("\nMapping 2 has been chosen\n");
-
-            if (x < 0)
+            x *= -1;
+            y *= -1;
+            result = atan2(y, x);
+            angle = result * 180 / PI;
+            if (angle < 0)
             {
-                x *= -1;
-                y *= -1;
-                result = atan2(y, x);
-                angle = result * 180 / PI;
-                if (angle < 0)
-                {
-                    angle = angle + 180;
-                }
-              //  printf("The angle is: %0.1lf\n", angle);
+                angle = angle + 180;
             }
-            else
-            {
-                result = atan2(y, x) * 180 / PI;
-                angle = fabs(result);
-              //  printf("The angle is: %0.1lf\n", angle);
-            }
+            /*printf("The angle is: %0.1lf\n", angle);
+                ms_delay(5000);
+   printf( "\f" ); */
         }
-
         else
         {
-            //Conditons for Mapping 1 (grid)
-            x = theta;
-            y = phi;
-            mapping[2] = mapping1[2];
-           // printf("\nMapping 1 has been chosen\n");
-            if (x < 0)
-            {
-                x *= -1;
-                y *= -1;
-                result = atan2(y, x);
-                angle = result * 180 / PI;
-                if (angle < 0)
-                {
-                    angle = angle + 180;
-                }
-               // printf("The angle is: %0.1lf\n", angle);
-            }
-            else
-            {
-                result = atan2(y, x) * 180 / PI;
-                angle = fabs(result);
-                //printf("The angle is: %0.0lf\n", angle);
-            }
+            result = atan2(y, x) * 180 / PI;
+            angle = fabs(result);
+            /* printf("The angle is: %0.1lf\n", angle);
+                ms_delay(5000);
+   printf( "\f" ); */
         }
-        int a = x;
-        int b = y;
-       // printf("Your current position: (%d , %d) \n", a, b);
-        currentposition(a, b);
-      
+    }
+
+    else
+    {
+        //Conditons for Mapping 1 (grid)
+        x = theta;
+        y = phi;
+        mapping[2] = mapping1[2];
+        printf("\nMapping 1 has been chosen\n");
+        /*
+            ms_delay(5000);
+   printf( "\f" ); */
+        if (x < 0)
+        {
+            x *= -1;
+            y *= -1;
+            result = atan2(y, x);
+            angle = result * 180 / PI;
+            if (angle < 0)
+            {
+                angle = angle + 180;
+            }
+            printf("The angle is: %0.1lf\n", angle);
+            /* 
+                ms_delay(5000);
+                printf( "\f" ); */
+        }
+        else
+        {
+            result = atan2(y, x) * 180 / PI;
+            angle = fabs(result);
+            printf("The angle is: %0.0lf\n", angle);
+            /*
+                ms_delay(5000);
+   printf( "\f" );*/
+        }
+    }
+    int a = x;
+    int b = y;
+    printf("Your current position: (%d , %d) \n", a, b);
+    /*
+        ms_delay(5000);
+   printf( "\f" ); */
+    currentposition(a, b);
+    int farposx = abs(6 - a);
+    int farposy = abs(5 - b);
+    double val = 30.0;
+    farcoilforce = sin(theta) * val;
+    closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
+    /* printf("Close coil force 1: %lf", closecoilforce);
+        ms_delay(5000);
+        printf( "\f" );*/
+    /*
+                    Max current 30A
+                    Max voltage 10.4V 
+                    Max wattage 304W
+                    **Will need at minimum 25% (76W) of intensity to power on a coil
+                    100% = 304W
+                    50% = 152W
+                */
+
+    vecmag = cos(fabs(theta)) * 100.0 + cos(fabs(phi)) * (closecoilforce);
+    /*  printf("Vec mag: %lf\n", vecmag);
+ms_delay(5000);
+   printf( "\f" ); */
+    //double intendedmag = pow(theta,2) + pow(phi,2);
+    //int intendedmag = 56;
+    int intendedmag;
+    printf ("What is the intended vector magnitude: ");
+    scanf("%d", &intendedmag);
+
+    //farcoilforce *= intendedmag/vecmag;
+    //farcoilmag = abs(farcoilforce) * 100;
+
+    closecoilforce *= intendedmag / vecmag;
+    /* printf("Coil force: %lf\n", closecoilforce);
+        ms_delay(5000);
+   printf( "\f" );*/
+    closecoilmag = fabs(closecoilforce) * 100;
+
+    if (closecoilmag != closecoilmag || closecoilmag > 100.0)
+    {
+        printf("The vector cannot be re-created\n");
+        /*
+           ms_delay(5000);
+   printf( "\f" ); */
+        //break;
+        //closecoilmag = 100.0;
+    }
+    //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
+    //  {
+    //         printf ( "The vector cannot be re-created\n");
+    //  }
+    else if (closecoilmag == 0.0)
+    {
+        printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+        /*   
+            ms_delay(5000);
+   printf( "\f" ); */
+        //farcoilmag = 100.0;
+    }
+    else
+    {
+        printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+        /* 
+ms_delay(5000);
+   printf( "\f" ); 
+            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
+            //       " to: "
+            //       setprecision(2)  farcoilmag  "%"  "\n"; */
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", a, b, closecoilmag);
+  /* ms_delay(5000);
+   printf( "\f" ); */
+        //farcoilmag = 100.0;
+        //closecoilmag = closecoilmag;
+    }
 }
 #endif /* COILINTENSE_H */

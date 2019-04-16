@@ -18,10 +18,10 @@
 int main(){
 
     //used if a file was present
-    magOutput();
+    //magOutput();
     
   //magoutput with read in from control algorithm, this can be called with all cases from control system
-  //magOutput(theta, phi);
+  magOutput(2.355, 2.9);
   
   /* Or if the control algorithm was able to output to a file
   
