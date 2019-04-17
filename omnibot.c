@@ -21,7 +21,19 @@ int main(){
     //magOutput();
     
   //magoutput with read in from control algorithm, this can be called with all cases from control system
-  magOutput(2.355, 2.9);
+  magOutput(0, 4.18);
+  magOutput(0.84, 5.23);
+  magOutput(1.7, 4.71);
+  magOutput(0.77, 3.1);
+  magOutput(2.093, 0);
+  magOutput(0.784, 5.3);
+  magOutput(1.57, 4.71);
+  magOutput(0, 3.14);
+  magOutput(2.03, 0);
+  magOutput(2.55, 2.093);
+  magOutput(0.51, 4.8);
+  magOutput(2.3, 2.3);
+  magOutput(0.74, 5);
   
   /* Or if the control algorithm was able to output to a file
   
