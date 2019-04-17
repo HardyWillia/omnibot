@@ -11,6 +11,7 @@
     -Willia 04/08/19: Added more conditions based on coil positions
     -Willia 04/14/19: Removed while loop that called file to work better with control algorithm
     -Willia 04/15/19: Reduced timing of program to 16.62 milliseconds
+    -Willia 04/16/19: Added better current mag calculation instead of manual input
 */
 
 #include <string.h>
@@ -34,9 +35,9 @@ int radius;
 
 double angle, result, x, y;
 
-//Intensify the furthest coil to 100%
+//Intensify the furthest coil to 100%, always (until a better method is found)
 //Calculate the force of the closest coil
-//Calculate the current vector magnitude
+//Calculate the current vector magnitude based on provided theta and phi from control
 //Multiply the magnitudes of force at both coils
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
@@ -91,7 +92,8 @@ double magOutput(double theta, double phi)
         y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
 
         mapping[2] = mapping2[2];
-        /*printf("\nMapping 2 has been chosen\n");
+        printf("\nMapping 2 has been chosen\n");
+        /*
 ms_delay(5000);
    printf( "\f" );*/
         if (x < 0)
@@ -104,7 +106,8 @@ ms_delay(5000);
             {
                 angle = angle + 180;
             }
-            /*printf("The angle is: %0.1lf\n", angle);
+            printf("The angle is: %0.1lf\n", angle);
+            /*
                 ms_delay(5000);
    printf( "\f" ); */
         }
@@ -112,7 +115,8 @@ ms_delay(5000);
         {
             result = atan2(y, x) * 180 / PI;
             angle = fabs(result);
-            /* printf("The angle is: %0.1lf\n", angle);
+            printf("The angle is: %0.1lf\n", angle);
+            /* 
                 ms_delay(5000);
    printf( "\f" ); */
         }
@@ -165,9 +169,7 @@ ms_delay(5000);
     double val = 30.0;
     farcoilforce = sin(theta) * val;
     closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
-    /* printf("Close coil force 1: %lf", closecoilforce);
-        ms_delay(5000);
-        printf( "\f" );*/
+
     /*
                     Max current 30A
                     Max voltage 10.4V 
@@ -175,60 +177,44 @@ ms_delay(5000);
                     **Will need at minimum 25% (76W) of intensity to power on a coil
                     100% = 304W
                     50% = 152W
-                */
+    */
 
     vecmag = cos(fabs(theta)) * 100.0 + cos(fabs(phi)) * (closecoilforce);
-    /*  printf("Vec mag: %lf\n", vecmag);
-ms_delay(5000);
-   printf( "\f" ); */
-    //double intendedmag = pow(theta,2) + pow(phi,2);
-    //int intendedmag = 56;
-    int intendedmag;
-    printf ("What is the intended vector magnitude: ");
-    scanf("%d", &intendedmag);
-
-    //farcoilforce *= intendedmag/vecmag;
-    //farcoilmag = abs(farcoilforce) * 100;
+    int intendedmag = pow(theta, 2) + pow(phi, 2);
 
     closecoilforce *= intendedmag / vecmag;
-    /* printf("Coil force: %lf\n", closecoilforce);
-        ms_delay(5000);
-   printf( "\f" );*/
     closecoilmag = fabs(closecoilforce) * 100;
 
     if (closecoilmag != closecoilmag || closecoilmag > 100.0)
     {
-        printf("The vector cannot be re-created\n");
+        printf("The vector cannot be re-created \n");
+                /*
+           ms_delay(5000);
+            printf( "\f" ); */
+        printf("ONLY intensify the closest coil at position (%d, %d) to: %d\n", a, b, 100);
         /*
            ms_delay(5000);
-   printf( "\f" ); */
-        //break;
+            printf( "\f" ); */
         //closecoilmag = 100.0;
     }
-    //  if (farcoilmag != farcoilmag || farcoilmag > 100.0)
-    //  {
-    //         printf ( "The vector cannot be re-created\n");
-    //  }
     else if (closecoilmag == 0.0)
     {
         printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
         /*   
             ms_delay(5000);
-   printf( "\f" ); */
+            printf( "\f" ); */
         //farcoilmag = 100.0;
     }
     else
     {
         printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
         /* 
-ms_delay(5000);
-   printf( "\f" ); 
-            // printf ( "Intensify the furthest coil ("  farposx  ", "  farposy  ")"
-            //       " to: "
-            //       setprecision(2)  farcoilmag  "%"  "\n"; */
+            ms_delay(5000);
+            printf( "\f" ); 
+        */
             printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", a, b, closecoilmag);
-  /* ms_delay(5000);
-   printf( "\f" ); */
+        /* ms_delay(5000);
+         printf( "\f" ); */
         //farcoilmag = 100.0;
         //closecoilmag = closecoilmag;
     }
