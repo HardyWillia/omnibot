@@ -6,6 +6,7 @@
     -Willia 03/04/19: Removed need for file and changed to array
     -Willia 03/06/19: Need to add all the possible coordinates for coils after the midterm
     -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
+    -Willia 04/16/19: Added more test cases to main file
 */
 //#include <iostream>
 #include <string.h>
