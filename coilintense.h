@@ -42,42 +42,6 @@ double angle, result, x, y;
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
 
-/*
-// Points in the Cartesian plane
-void currentposition(int currentposx, int currentposy)
-{
-
-    int n = 2;
-    int i;
-    //Sort through the coordinates to find the closest to a given point
-    for (i = 1; i < n; ++i)
-    {
-
-        if (currentposx >= 6)
-        {
-            currentposx = 1;
-
-            if (angle >= 0.0 && angle < 40.0)
-            {
-                currentposx += 1;
-            }
-            else if (angle > 40.0 && angle <= 90.0)
-            {
-                currentposy += 1;
-            }
-            else if (angle > 90 && angle <= 180)
-            {
-                currentposx = abs(7 - currentposx);
-                currentposy += 2;
-            }
-        }
-        else
-        {
-            currentposx += 1;
-        }
-    }
-}
-*/
 
 //Output the magnitude
 double magOutput(double theta, double phi)
