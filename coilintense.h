@@ -42,6 +42,7 @@ double angle, result, x, y;
 //Get the magnitudes for each coil
 //Output the magnitudes (determines coil intensity for switching)
 
+/*
 // Points in the Cartesian plane
 void currentposition(int currentposx, int currentposy)
 {
@@ -76,6 +77,7 @@ void currentposition(int currentposx, int currentposy)
         }
     }
 }
+*/
 
 //Output the magnitude
 double magOutput(double theta, double phi)
@@ -157,15 +159,45 @@ ms_delay(5000);
    printf( "\f" );*/
         }
     }
-    int a = x;
-    int b = y;
-    printf("Your current position: (%d , %d) \n", a, b);
+    int currentposx = x;
+    int currentposy = y;
+    printf("Your current position: (%d , %d) \n", currentposx, currentposy);
     /*
         ms_delay(5000);
    printf( "\f" ); */
-    currentposition(a, b);
-    int farposx = abs(6 - a);
-    int farposy = abs(5 - b);
+   // currentposition(a, b);
+    int n = 2;
+    int i;
+    //Sort through the coordinates to find the closest to a given point
+    for (i = 1; i < n; ++i)
+    {
+
+        if (currentposx >= 6)
+        {
+            currentposx = 1;
+
+            if (angle >= 0.0 && angle < 40.0)
+            {
+                currentposx += 1;
+            }
+            else if (angle > 40.0 && angle <= 90.0)
+            {
+                currentposy += 1;
+            }
+            else if (angle > 90 && angle <= 180)
+            {
+                currentposx = abs(7 - currentposx);
+                currentposy += 2;
+            }
+        }
+        else
+        {
+            currentposx += 1;
+        }
+    }
+
+    int farposx = abs(6 - currentposx);
+    int farposy = abs(5 - currentposy);
     double val = 30.0;
     farcoilforce = sin(theta) * val;
     closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
@@ -191,7 +223,7 @@ ms_delay(5000);
                 /*
            ms_delay(5000);
             printf( "\f" ); */
-        printf("ONLY intensify the closest coil at position (%d, %d) to: %d\n", a, b, 100);
+        printf("ONLY intensify the closest coil at position (%d, %d) to: %d\n", currentposx, currentposy, 100);
         /*
            ms_delay(5000);
             printf( "\f" ); */
@@ -212,7 +244,7 @@ ms_delay(5000);
             ms_delay(5000);
             printf( "\f" ); 
         */
-            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", a, b, closecoilmag);
+            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
         /* ms_delay(5000);
          printf( "\f" ); */
         //farcoilmag = 100.0;
