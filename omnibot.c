@@ -7,6 +7,7 @@
     -Willia 03/06/19: Need to add all the possible coordinates for coils after the midterm
     -Willia 04/03/19: Finished initial coil identification, there is a bug in the array
     -Willia 04/16/19: Added more test cases to main file
+    -Willia 04/18/19: Cleaned code to remove any unnecessary items
 */
 //#include <iostream>
 #include <string.h>
@@ -18,12 +19,8 @@
 
 int main(){
 
-    //used if a file was present
-    //magOutput();
     
-  //magoutput with read in from control algorithm, this can be called with all cases from control system
-
-
+  //magOutput with read in from control algorithm
   //Equations from control algorithm
     /*
     torquetheta = sin(PI/2 – thetat) * 0.5003 + (0.127 * ((PI /2 – thetat) -1) *  thetaprimet + 0.9738 * (PI/2  - thetat);
