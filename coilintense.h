@@ -31,7 +31,7 @@ double vecmag;
 double farcoilmag;
 double closecoilmag;
 int intensity[2];
-int radius;
+int radius = 17;
 
 double angle, result, x, y;
 
@@ -172,9 +172,10 @@ ms_delay(5000);
     for (i = 1; i < n; ++i)
     {
 
-        if (currentposx >= 6)
+        if (currentposx >= 7 || currentposy < 0)
         {
             currentposx = 1;
+            currentposy = 5;
 
             if (angle >= 0.0 && angle < 40.0)
             {
