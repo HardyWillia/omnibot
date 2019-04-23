@@ -58,7 +58,7 @@ double magOutput(double theta, double phi)
         y = sqrt(pow(radius, 2) - pow(cos(theta), 2) * pow(radius, 2)) * sin(phi);
 
         mapping[2] = mapping2[2];
-        printf("\nMapping 2 has been chosen\n");
+       // printf("\nMapping 2 has been chosen\n");
         /*
 ms_delay(5000);
    printf( "\f" );*/
@@ -72,7 +72,7 @@ ms_delay(5000);
             {
                 angle = angle + 180;
             }
-            printf("The angle is: %0.1lf\n", angle);
+            //printf("The angle is: %0.1lf\n", angle);
             /*
                 ms_delay(5000);
    printf( "\f" ); */
@@ -81,7 +81,7 @@ ms_delay(5000);
         {
             result = atan2(y, x) * 180 / PI;
             angle = fabs(result);
-            printf("The angle is: %0.1lf\n", angle);
+            //printf("The angle is: %0.1lf\n", angle);
             /* 
                 ms_delay(5000);
    printf( "\f" ); */
@@ -94,7 +94,7 @@ ms_delay(5000);
         x = theta;
         y = phi;
         mapping[2] = mapping1[2];
-        printf("\nMapping 1 has been chosen\n");
+       // printf("\nMapping 1 has been chosen\n");
         /*
             ms_delay(5000);
    printf( "\f" ); */
@@ -108,7 +108,7 @@ ms_delay(5000);
             {
                 angle = angle + 180;
             }
-            printf("The angle is: %0.1lf\n", angle);
+           // printf("The angle is: %0.1lf\n", angle);
             /* 
                 ms_delay(5000);
                 printf( "\f" ); */
@@ -117,7 +117,7 @@ ms_delay(5000);
         {
             result = atan2(y, x) * 180 / PI;
             angle = fabs(result);
-            printf("The angle is: %0.0lf\n", angle);
+          //  printf("The angle is: %0.0lf\n", angle);
             /*
                 ms_delay(5000);
    printf( "\f" );*/
@@ -125,7 +125,8 @@ ms_delay(5000);
     }
     int currentposx = x;
     int currentposy = y;
-    printf("Your current position: (%d , %d) \n", currentposx, currentposy);
+    int closex, closey;
+    //printf("Your current position: (%d , %d) \n", currentposx, currentposy);
     /*
         ms_delay(5000);
    printf( "\f" ); */
@@ -138,26 +139,31 @@ ms_delay(5000);
 
         if (currentposx >= 7 || currentposy < 0)
         {
-            currentposx = 1;
-            currentposy = 5;
+            closex = 1;
+            closey = 5;
 
             if (angle >= 0.0 && angle < 40.0)
             {
                 currentposx += 1;
+                closex = currentposx;
             }
             else if (angle > 40.0 && angle <= 90.0)
             {
                 currentposy += 1;
+                closey = currentposy;
             }
             else if (angle > 90 && angle <= 180)
             {
                 currentposx = abs(7 - currentposx);
                 currentposy += 2;
+                closex = currentposx;
+                closey = currentposy;
             }
         }
         else
         {
             currentposx += 1;
+            closex = currentposx;
         }
     }
 
@@ -184,36 +190,48 @@ ms_delay(5000);
 
     if (closecoilmag != closecoilmag || closecoilmag > 100.0)
     {
-        printf("The vector cannot be re-created \n");
+        //printf("The vector cannot be re-created \n");
                 /*
            ms_delay(5000);
             printf( "\f" ); */
-        printf("ONLY intensify the closest coil at position (%d, %d) to: %d\n", currentposx, currentposy, 100);
+        //printf("ONLY intensify the closest coil at position (%d, %d) to: %d\n", closex, closey, 100);
         /*
            ms_delay(5000);
             printf( "\f" ); */
-        //closecoilmag = 100.0;
+        closex = closex;
+        closey = closey;
+        closecoilmag = 100.0;
     }
     else if (closecoilmag == 0.0)
     {
-        printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+        //printf("ONLY intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
         /*   
             ms_delay(5000);
             printf( "\f" ); */
-        //farcoilmag = 100.0;
+        farposx = farposx;
+        farposy = farposy;
+        farcoilmag = 100.0;
     }
     else
     {
-        printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
+       // printf("Intensify the furthest coil at position (%d, %d) to: %d\n", farposx, farposy, 100);
         /* 
             ms_delay(5000);
             printf( "\f" ); 
         */
-            printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", currentposx, currentposy, closecoilmag);
+         //   printf ( "Intensify the closest coil at position (%d, %d) to: %0.0lf\n", closex, closey, closecoilmag);
         /* ms_delay(5000);
          printf( "\f" ); */
-        //farcoilmag = 100.0;
-        //closecoilmag = closecoilmag;
+        farcoilmag = 100.0;
+        farposx = farposx;
+        farposy = farposy;
+        
+        closecoilmag = closecoilmag;
+        closex = closex;
+        closey = closey;
     }
+    
+    return closex, closey, closecoilmag, farposx, farposy, farcoilmag;
 }
+
 #endif /* COILINTENSE_H */
