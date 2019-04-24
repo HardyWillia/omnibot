@@ -19,7 +19,74 @@
 #include <math.h>
 #include <stdlib.h>
 
+//#include "adc.h"
+
 #define PI 3.14159265
+
+/*ISR
+#define PERIOD_10ms 0x01
+
+void Timer_ISR(void)
+{
+    static char State = PERIOD_10ms;
+
+    switch (State)
+    {
+    case PERIOD_10ms:
+    {
+
+        // Timer Stop;
+        T1CON = 0x8030; //setting Timer1
+        TMR1 = 0;
+
+        // ADC sampling -- get from Aladdin's code
+        //Average the signals
+        
+        int adcnum = 10;
+        int sum1 = 0;
+        int sum2 = 0;
+        int sum3 = 0;
+        int finalsum = 0; 
+        int avg;
+
+        
+            for(int i = 1; i <= adcnum; i++){
+
+                //pin 22 gets toggled
+                ADC_ChannelEnable(SENSOR1);
+                int adc1 = ADC_ReadData(SENSOR1); 
+
+                //pin 23 gets toggled
+                ADC_ChannelEnable(SENSOR2);
+                int adc2 = ADC_ReadData(SENSOR2); 
+
+                //pin 24 get toggled
+                ADC_ChannelEnable(SENSOR3);
+                int adc3 = ADC_ReadData(SENSOR3); 
+
+                    //Get sum of all readings per sensor
+                    sum1 += adc1;
+                    sum2 += adc2;
+                    sum3 += adc3;
+                    finalsum = sum1 + sum2 + sum3;
+            }
+
+        avg = finalsum / adcnum;
+        printf("Average: %d\n", avg);
+
+        // Timer Start;
+        TMR1 = 1;
+        break;
+    }
+
+    default:
+    {
+        msdelay(10);
+        break;
+    }
+    }
+}
+*/
 
 //Global variables
 double theta;
@@ -30,10 +97,10 @@ double closecoilforce;
 double vecmag;
 double farcoilmag;
 double closecoilmag;
-int intensity[2];
 int radius = 17;
 
 double angle, result, x, y;
+int closex, closey, farposx, farposy;
 
 //Intensify the furthest coil to 100%, always (until a better method is found)
 //Calculate the force of the closest coil
@@ -125,7 +192,6 @@ ms_delay(5000);
     }
     int currentposx = x;
     int currentposy = y;
-    int closex, closey;
     //printf("Your current position: (%d , %d) \n", currentposx, currentposy);
     /*
         ms_delay(5000);
@@ -167,8 +233,8 @@ ms_delay(5000);
         }
     }
 
-    int farposx = abs(6 - currentposx);
-    int farposy = abs(5 - currentposy);
+    farposx = abs(6 - currentposx);
+    farposy = abs(5 - currentposy);
     double val = 30.0;
     farcoilforce = sin(theta) * val;
     closecoilforce = (sin(fabs(theta) * val)) / (sin(fabs(phi)));
