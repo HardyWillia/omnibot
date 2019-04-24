@@ -108,23 +108,20 @@ int coilcoords[42][3] =
     {6, 5, 41}
 };
 
-void matchCoil(int thirdParam)
+void matchCoil(int val1, int val2)
 {
 
-  int i, j, k;
-	int count = 1;
+  int i, j, thirdParam;
   for (i = 0; i < 41; ++i)
   {
     for (j = 0; j < 2; ++j)
     {
-       if(thirdParam == coilcoords[i][2]){
-		int val1= coilcoords[i][0];
-		int val2 = coilcoords[i][1];       
- 		printf("test[%d][%d]\n", val1, val2);
-		break;
-	}
-      }
- 
+       if(val1 == coilcoords[i][0] && val2 == coilcoords[i][1]){
+		      thirdParam = coilcoords[i][2];       
+ 		      printf("Coil(%d , %d)\n = %d", val1, val2, thirdParam);
+		      break;
+	      }
+    }
   }
 }
 
@@ -138,7 +135,7 @@ int main()
     torquephi  = (0.127 * ((π /2 – thetat) -1) * phiprimet 	
   */
     
-    matchCoil(16);
+    matchCoil(4,5);
 
    /*
     magOutput(0, 4.18);
