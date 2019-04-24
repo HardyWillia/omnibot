@@ -63,8 +63,8 @@ void Timer_ISR(void)
 */
 
 //Coil Array
-int coilcoords[3][25][1] = {
-    {0, 0, 0},
+int coilcoords[42][3] =
+   { {0, 0, 0},
     {0, 1, 1},
     {0, 2, 2},
     {0, 3, 3},
@@ -108,23 +108,23 @@ int coilcoords[3][25][1] = {
     {6, 5, 41}
 };
 
-int matchCoil(int thirdParam)
+void matchCoil(int thirdParam)
 {
 
   int i, j, k;
-  for (i = 0; i < 2; ++i)
+	int count = 1;
+  for (i = 0; i < 41; ++i)
   {
-    for (j = 0; j < 3; ++j)
+    for (j = 0; j < 2; ++j)
     {
-      for (k = 0; k < 2; ++k)
-      {
-        scanf("%d", &coilcoords[i][j][k]);
-        if (k == thirdParam)
-        {
-          return coilcoords[i][j];
-        }
+       if(thirdParam == coilcoords[i][2]){
+		int val1= coilcoords[i][0];
+		int val2 = coilcoords[i][1];       
+ 		printf("test[%d][%d]\n", val1, val2);
+		break;
+	}
       }
-    }
+ 
   }
 }
 
@@ -138,7 +138,7 @@ int main()
     torquephi  = (0.127 * ((π /2 – thetat) -1) * phiprimet 	
   */
     
-    matchCoil(2);
+    matchCoil(16);
 
    /*
     magOutput(0, 4.18);
